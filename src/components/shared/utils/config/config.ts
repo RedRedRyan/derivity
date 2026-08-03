@@ -143,7 +143,7 @@ const DEFAULT_MARTINGALE_CONFIG: MartingaleConfig = {
 
 const DEFAULT_DOMAIN_UI: DomainUIConfig = {
     brandName: 'Deriv Bot',
-    primaryColor: '#f97316',
+    primaryColor: '#f0050c',
     secondaryColor: '#1a1a2e',
     accentColor: '#2196f3',
     logoUrl: '',
@@ -152,7 +152,7 @@ const DEFAULT_DOMAIN_UI: DomainUIConfig = {
     headerTextColor: 'var(--text-colored-background)',
     sidebarBgColor: '#16213e',
     sidebarTextColor: '#e0e0e0',
-    buttonPrimaryBg: '#f97316',
+    buttonPrimaryBg: '#f0050c',
     buttonPrimaryText: 'var(--text-colored-background)',
     buttonSecondaryBg: '#2d2d44',
     buttonSecondaryText: '#e0e0e0',
@@ -162,7 +162,7 @@ const DEFAULT_DOMAIN_UI: DomainUIConfig = {
     textSecondary: '#a0a0b0',
     successColor: '#4caf50',
     errorColor: '#f44336',
-    warningColor: '#ff9800',
+    warningColor: '#f0050c',
     fontFamily: "'Inter', 'Segoe UI', sans-serif",
     borderRadius: '8px',
     showHeaderLogo: true,
@@ -305,6 +305,7 @@ export const DOMAIN_CONFIG: Record<string, DomainConfig> = {
         aliases: ['www.cyctrades.vercel.app'],
         clientId: process.env.CLIENT_ID || '33cCr2bWsByPgLlormNFw',
         appId: process.env.APP_ID || '71937',
+        botsFolder: 'optimumtraders.site',
         redirectUri: process.env.REDIRECT_URI || 'https://cyctrades.vercel.app/',
         includeLegacyAppIdInOAuth: true,
         features: {
@@ -316,7 +317,7 @@ export const DOMAIN_CONFIG: Record<string, DomainConfig> = {
         },
         ui: {
             ...LOCALHOST_DOMAIN_UI,
-            brandName: 'Risk Managers',
+            brandName: 'Cycle Trades',
         },
     }),
     // ── Additional production domain ─────────────────────────────────────────
