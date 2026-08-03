@@ -137,7 +137,7 @@ const getContractStatusLabel = (status: string) => {
 const getDerivWebSocketUrl = () => {
     const stored_app_id =
         typeof window !== 'undefined' ? window.localStorage.getItem('config.app_id') || undefined : undefined;
-    const app_id = stored_app_id || process.env.APP_ID || '1089';
+    const app_id = stored_app_id || process.env.APP_ID || '71937';
 
     return `wss://ws.derivws.com/websockets/v3?app_id=${encodeURIComponent(app_id)}`;
 };

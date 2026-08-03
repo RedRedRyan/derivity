@@ -303,9 +303,9 @@ export const DOMAIN_CONFIG: Record<string, DomainConfig> = {
     ...createHostedDomainEntries({
         primaryDomain: 'riskmanagers.site',
         aliases: ['www.riskmanagers.site'],
-        clientId: '33cCr2bWsByPgLlormNFw',
-        appId: '71937',
-        redirectUri: 'https://riskmanagers.site/',
+        clientId: process.env.CLIENT_ID || '33cCr2bWsByPgLlormNFw',
+        appId: process.env.APP_ID || '71937',
+        redirectUri: process.env.REDIRECT_URI || 'https://riskmanagers.site/',
         includeLegacyAppIdInOAuth: true,
         features: {
             autoTrades: true,
@@ -397,7 +397,7 @@ export const DOMAIN_CONFIG: Record<string, DomainConfig> = {
         primaryDomain: 'husseinfx.site',
         aliases: ['www.husseinfx.site'],
         clientId: '33B0O9dYtRl6X3OQ6rJsz',
-        appId: '',
+        appId: '122208',
         redirectUri: 'https://husseinfx.site/',
         botsFolder: 'husseinfx.site',
         includeLegacyAppIdInOAuth: false,
@@ -433,7 +433,7 @@ export const DOMAIN_CONFIG: Record<string, DomainConfig> = {
         primaryDomain: 'levynetrading.site',
         aliases: ['www.levynetrading.site', 'novaderiv.site', 'www.novaderiv.site'],
         clientId: '33B45506MeTF6j6VHOi7A',
-        appId: '',
+        appId: '122208',
         redirectUri: 'https://levynetrading.site/',
         botsFolder: 'levynetrading.site',
         includeLegacyAppIdInOAuth: false,
@@ -823,8 +823,8 @@ export const getDomainConfig = (activeHostname = window.location.hostname): Doma
     }
     // Fallback — used on localhost and Replit dev domains
     return {
-        clientId: process.env.CLIENT_ID || '',
-        appId: process.env.APP_ID || '33PPqCmoCqt9yWsbBuSPu',
+        clientId: process.env.CLIENT_ID || '33cCr2bWsByPgLlormNFw',
+        appId: process.env.APP_ID || '71937',
         redirectUri: process.env.REDIRECT_URI || window.location.origin,
         botsFolder: process.env.BOTS_FOLDER || DEFAULT_BOTS_FOLDER,
         canonicalHost: hostname,
@@ -1200,8 +1200,8 @@ export const generateOAuthURL = async (prompt?: string, domainConfig = getDomain
         // CLIENT_ID, APP_ID, and redirect URI from DOMAIN_CONFIG)
         const domainCfg = domainConfig;
         const { clientId, appId, redirectUri, includeLegacyAppIdInOAuth } = {
-            clientId: domainCfg.clientId,
-            appId: domainCfg.appId,
+            clientId: domainCfg.clientId || process.env.CLIENT_ID || '33cCr2bWsByPgLlormNFw',
+            appId: domainCfg.appId || process.env.APP_ID || '71937',
             redirectUri: domainCfg.redirectUri,
             includeLegacyAppIdInOAuth: domainCfg.includeLegacyAppIdInOAuth,
         };

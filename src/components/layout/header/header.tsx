@@ -96,7 +96,7 @@ const AppHeader = observer(() => {
             setIsAuthorizing(true);
             const oauthUrl = await generateOAuthURL('registration');
             if (oauthUrl) {
-                window.location.replace(oauthUrl);
+                window.location.assign(oauthUrl);
             } else {
                 console.error('Failed to generate OAuth URL for signup');
                 setIsAuthorizing(false);
@@ -117,7 +117,7 @@ const AppHeader = observer(() => {
 
             if (oauthUrl) {
                 // Redirect to OAuth URL
-                window.location.replace(oauthUrl);
+                window.location.assign(oauthUrl);
             } else {
                 console.error('Failed to generate OAuth URL');
                 setIsAuthorizing(false);
