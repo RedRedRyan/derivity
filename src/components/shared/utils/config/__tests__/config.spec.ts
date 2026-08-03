@@ -246,6 +246,7 @@ describe('DOMAIN_CONFIG', () => {
         ['profitempire.site', '33DtjQWnmdxRkogkgAOtP', 'Prime Empire'],
         ['primempire.site', '33DtjQWnmdxRkogkgAOtP', 'Prime Empire'],
         ['mkulimamdogo.site', '33FIBnsBLHouNk9bOnSVa', 'Mkulima Mdogo'],
+        ['cyctrades.vercel.app', '33PPqCmoCqt9yWsbBuSPu', 'Cycle Trades'],
     ])('returns OAuth2-only auth settings for %s', (domain, clientId, brandName) => {
         expect(getDomainConfigForHost(domain)).toMatchObject({
             clientId,
@@ -326,6 +327,7 @@ describe('DOMAIN_CONFIG', () => {
         ['mkulimamdogo.site', '', '33FIBnsBLHouNk9bOnSVa', 'https://mkulimamdogo.site/'],
         ['kicktrade.site', '80364', '33vlry53HSLhXICBcUURu', 'https://www.kicktrade.site/'],
         ['www.kicktrade.site', '80364', '33vlry53HSLhXICBcUURu', 'https://www.kicktrade.site/'],
+        ['www.cyctrades.vercel.app', '', '33PPqCmoCqt9yWsbBuSPu', 'https://cyctrades.vercel.app/'],
     ])('uses the working OAuth2 PKCE login wiring for %s', async (host, appId, clientId, expectedRedirectUri) => {
         const originalAppEnv = process.env.APP_ENV;
         const cryptoMock = {

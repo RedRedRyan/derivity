@@ -11,7 +11,8 @@ export const AppLogo = () => {
 
     return (
         <a href='/' className='app-header__logo' aria-label={localize('Home')}>
-            <span className='powered-by-text'>Powered by Deriv</span>
+            <img src='/logo.png' />
+            <span className='powered-by-text'>Cycle Trades</span>
         </a>
     );
 };

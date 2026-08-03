@@ -149,6 +149,7 @@ export const LabelPairedPuzzlePieceTwoCaptionBoldIcon = createStrokeIcon(({ stro
         stroke={stroke}
         strokeWidth={strokeWidth}
         strokeLinejoin='round'
+        fill={stroke} // ensures inside matches stroke color
     />
 ));
 

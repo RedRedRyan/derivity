@@ -56,6 +56,7 @@ import ManualTrading from '../manual-trading';
 import Scanner from '../scanner';
 import TradingView from '../tradingview';
 import UpAndDown from '../up-and-down';
+import { Search, Lightbulb, Star, TrendingUp, LayoutGrid, Puzzle, LineChart, BarChart3, Bot } from 'lucide-react';
 import './main.scss';
 
 const AppWrapper = observer(() => {
@@ -495,12 +496,7 @@ const AppWrapper = observer(() => {
                                 <div
                                     label={
                                         <>
-                                            <LabelPairedLightbulbCaptionRegularIcon
-                                                height='24px'
-                                                width='24px'
-                                                fill='#F0050C'
-                                                stroke='#F0050C'
-                                            />
+                                            <Lightbulb size={24} color='#F0050C' />
                                             <Localize i18n_default_text='Dashboard' />
                                         </>
                                     }
@@ -512,11 +508,7 @@ const AppWrapper = observer(() => {
                             <div
                                 label={
                                     <>
-                                        <LabelPairedCircleStarCaptionRegularIcon
-                                            height='24px'
-                                            width='24px'
-                                            fill='#F0050C'
-                                        />
+                                        <Bot color='#f0050c' />
                                         <Localize i18n_default_text='Free Bots' />
                                     </>
                                 }
@@ -562,6 +554,7 @@ const AppWrapper = observer(() => {
                                             width='24px'
                                             fill='#F0050C'
                                         />
+
                                         <Localize i18n_default_text='Bot Builder' />
                                     </>
                                 }

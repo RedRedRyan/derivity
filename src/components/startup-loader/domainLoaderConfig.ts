@@ -26,7 +26,7 @@ const DEFAULT_MESSAGES = [
 
 const LOCALHOST_LOADER_COLORS = {
     primaryColor: '#00d4ff',
-    secondaryColor: '#7c3aed',
+    secondaryColor: '#f0050c',
     accentColor: '#fbbf24',
     backgroundColor: '#020617',
 } as const;
@@ -160,6 +160,12 @@ export const domainLoaderConfig: Record<string, DomainLoaderConfig> = {
         backgroundColor: '#0a0f05',
     }),
     'mrduke.site': createLoaderConfig('mrduke.site', 'Mr Duke', {
+        primaryColor: '#00ff88',
+        secondaryColor: '#00aaff',
+        accentColor: '#ffd700',
+        backgroundColor: '#030712',
+    }),
+    'cyctrades.vercel.app': createLoaderConfig('cyctrades.vercel.app', 'Cycle Trades', {
         primaryColor: '#00ff88',
         secondaryColor: '#00aaff',
         accentColor: '#ffd700',
