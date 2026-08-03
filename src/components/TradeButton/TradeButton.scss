@@ -1,0 +1,67 @@
+.trade-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    min-height: 48px;
+    border: 1px solid var(--border-color, #ccc);
+    border-radius: 8px;
+    background: var(--bg-color, #fff);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    position: relative;
+    user-select: none;
+
+    &__label {
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: var(--text-color, #333);
+    }
+
+    &--selected {
+        border-color: var(--primary-color, #007bff);
+        background: var(--primary-color-light, rgba(0, 123, 255, 0.1));
+
+        .trade-button__label {
+            color: var(--primary-color, #007bff);
+            font-weight: 600;
+        }
+    }
+
+    &--disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    &:hover:not(&--disabled) {
+        transform: translateY(-1px);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    &:active:not(&--disabled) {
+        transform: translateY(0);
+    }
+
+    .percentage-badge {
+        margin-top: 4px;
+        font-size: 0.75rem;
+        font-weight: bold;
+        color: var(--text-colored-background);
+        background: var(--success-color, #28a745);
+        padding: 2px 6px;
+        border-radius: 12px;
+        animation: fadeIn 0.3s ease-in-out;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

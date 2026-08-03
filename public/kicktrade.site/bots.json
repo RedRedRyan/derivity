@@ -1,0 +1,44 @@
+[
+    {
+        "id": "hunter-bot-switcher",
+        "name": "HUNTER BOT SWITCHER",
+        "file": "HUNTER BOT SWITCHER \ud83d\udd25\ud83d\udd25\ud83d\udd25 (1).xml",
+        "description": "Hunter Bot Switcher strategy ready to load into Bot Builder.",
+        "emoji": "KT"
+    },
+    {
+        "id": "mrzetuzetu-even-odd-switcher",
+        "name": "Mrzetuzetu Even Odd Switcher",
+        "file": "Mrzetuzetu Even Odd Switcher.xml",
+        "description": "Even/Odd switcher strategy ready to load into Bot Builder.",
+        "emoji": "KT"
+    },
+    {
+        "id": "mrzetuzetu-sv1",
+        "name": "Mrzetuzetu sv1",
+        "file": "Mrzetuzetu sv1.xml",
+        "description": "Mrzetuzetu sv1 strategy ready to load into Bot Builder.",
+        "emoji": "KT"
+    },
+    {
+        "id": "mrzetuzetu-sv2",
+        "name": "Mrzetuzetu sv2",
+        "file": "Mrzetuzetu sv2.xml",
+        "description": "Mrzetuzetu sv2 strategy ready to load into Bot Builder.",
+        "emoji": "KT"
+    },
+    {
+        "id": "over-under-turbo-1-1",
+        "name": "over under turbo 1.1",
+        "file": "over under turbo 1.1.xml.xml",
+        "description": "Over/Under turbo strategy ready to load into Bot Builder.",
+        "emoji": "KT"
+    },
+    {
+        "id": "under-market-ai-without-martingale",
+        "name": "Under Market AI Bot without a Martingale",
+        "file": "Under Market AI Bot (without a Martingale).xml.xml",
+        "description": "Under Market AI strategy ready to load into Bot Builder.",
+        "emoji": "KT"
+    }
+]

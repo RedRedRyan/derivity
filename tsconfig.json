@@ -1,0 +1,29 @@
+{
+    "compilerOptions": {
+        "target": "ES2020",
+        "useDefineForClassFields": true,
+        "lib": ["ES2020", "DOM", "DOM.Iterable"],
+        "module": "ESNext",
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": false,
+        "moduleResolution": "bundler",
+        "allowImportingTsExtensions": true,
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "noEmit": true,
+        "jsx": "react-jsx",
+        "strict": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noFallthroughCasesInSwitch": true,
+        "allowJs": true,
+        "paths": {
+            "@/*": ["./src/*"],
+            "@deriv-com/translations": ["../node_modules/@deriv-com/translations/dist/src/index.d.ts"]
+        },
+        "esModuleInterop": true,
+        "types": ["jest", "@testing-library/jest-dom"]
+    },
+    "include": ["src", "jest.setup.ts"],
+    "exclude": ["src/Stores"]
+}

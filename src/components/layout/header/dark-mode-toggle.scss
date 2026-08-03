@@ -1,0 +1,75 @@
+.dark-mode-toggle {
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-right: 1.2rem;
+
+    @media (max-width: 768px) {
+        margin-right: 0.4rem;
+    }
+
+    &__track {
+        display: flex;
+        align-items: center;
+        width: 4.4rem;
+        height: 2.4rem;
+        border-radius: 1.2rem;
+        padding: 0.2rem;
+        transition: background 0.25s ease;
+        background: #cbd5e1;
+
+        .dark-mode-toggle--dark & {
+            background: #6366f1;
+        }
+    }
+
+    &__thumb {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        background: #ffffff;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
+        transition:
+            transform 0.25s ease,
+            color 0.25s ease;
+        transform: translateX(0);
+        color: #f59e0b;
+
+        .dark-mode-toggle--dark & {
+            transform: translateX(2rem);
+            color: #6366f1;
+        }
+    }
+
+    @media (max-width: 480px) {
+        &__track {
+            width: 4rem;
+            height: 2.2rem;
+        }
+
+        &__thumb {
+            width: 1.8rem;
+            height: 1.8rem;
+
+            .dark-mode-toggle--dark & {
+                transform: translateX(1.8rem);
+            }
+        }
+    }
+
+    &:focus-visible {
+        outline: 2px solid #6366f1;
+        outline-offset: 2px;
+        border-radius: 1.2rem;
+    }
+
+    &:hover .dark-mode-toggle__track {
+        opacity: 0.85;
+    }
+}

@@ -1,0 +1,814 @@
+// Domain Preloader Styles
+// Premium animated loading experience for trading applications
+
+// ============================================
+// Variables
+// ============================================
+$preloader-duration: 0.6s;
+$exit-duration: 0.8s;
+$particle-drift: var(--particle-drift, 20px);
+$particle-rotation: var(--particle-rotation, 0deg);
+
+// ============================================
+// Reduced Motion Support
+// ============================================
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+// ============================================
+// Main Preloader Container
+// ============================================
+.domain-preloader {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--loader-background);
+    overflow: hidden;
+    opacity: 1;
+    transition:
+        opacity $exit-duration ease-out,
+        transform $exit-duration ease-out;
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+
+    &--exiting {
+        opacity: 0;
+        transform: scale(1.02);
+
+        .domain-preloader__content {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+    }
+
+    &--complete {
+        .circular-loader {
+            transform: scale(1.05);
+        }
+    }
+}
+
+// ============================================
+// Background Effects
+// ============================================
+.domain-preloader__background {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse at 20% 20%, rgba(255, 255, 255, 0.03) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(255, 255, 255, 0.02) 0%, transparent 50%),
+        linear-gradient(
+            180deg,
+            var(--loader-background) 0%,
+            color-mix(in srgb, var(--loader-background) 97%, white) 50%,
+            var(--loader-background) 100%
+        );
+    animation: backgroundPulse 8s ease-in-out infinite;
+}
+
+@keyframes backgroundPulse {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.8;
+    }
+}
+
+// Grid Pattern
+.domain-preloader__grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    background-position: center;
+    mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+    animation: gridMove 20s linear infinite;
+}
+
+@keyframes gridMove {
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(60px, 60px);
+    }
+}
+
+// Gradient Orbs
+.domain-preloader__gradient-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.3;
+    animation: orbFloat 10s ease-in-out infinite;
+
+    &--primary {
+        width: 400px;
+        height: 400px;
+        top: 10%;
+        left: 10%;
+        background: var(--loader-primary);
+        animation-delay: 0s;
+    }
+
+    &--secondary {
+        width: 350px;
+        height: 350px;
+        bottom: 20%;
+        right: 15%;
+        background: var(--loader-secondary);
+        animation-delay: -5s;
+    }
+}
+
+@keyframes orbFloat {
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.3;
+    }
+    50% {
+        transform: translate(30px, -30px) scale(1.1);
+        opacity: 0.4;
+    }
+}
+
+// ============================================
+// Falling Money Particles
+// ============================================
+.falling-money {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.falling-money__particle {
+    position: absolute;
+    top: -80px;
+    will-change: transform, opacity;
+}
+
+// Dollar bill particles
+.falling-money__particle--bill {
+    animation: billFall var(--animation-duration, 10s) linear infinite;
+    animation-delay: var(--animation-delay, 0s);
+
+    svg {
+        animation:
+            billWobble var(--particle-wobble-speed, 2s) ease-in-out infinite,
+            billSpin var(--particle-spin-duration, 4s) linear infinite;
+    }
+}
+
+// Symbol particles (dollar signs, etc)
+.falling-money__particle--symbol {
+    font-family:
+        'Inter',
+        -apple-system,
+        BlinkMacSystemFont,
+        sans-serif;
+    font-weight: 700;
+    animation: symbolFall var(--animation-duration, 8s) linear infinite;
+    animation-delay: var(--animation-delay, 0s);
+}
+
+.falling-money__symbol {
+    display: inline-block;
+    animation: symbolPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes billFall {
+    0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+    }
+    5% {
+        opacity: var(--opacity, 0.25);
+    }
+    95% {
+        opacity: var(--opacity, 0.25);
+    }
+    100% {
+        transform: translateY(calc(100vh + 150px)) translateX(var(--particle-drift, 30px));
+        opacity: 0;
+    }
+}
+
+@keyframes billWobble {
+    0%,
+    100% {
+        transform: rotate(-15deg) translateX(-5px);
+    }
+    50% {
+        transform: rotate(15deg) translateX(5px);
+    }
+}
+
+@keyframes billSpin {
+    0% {
+        filter: brightness(1) drop-shadow(0 4px 12px rgba(0, 255, 136, 0.3));
+    }
+    50% {
+        filter: brightness(1.2) drop-shadow(0 8px 20px rgba(0, 255, 136, 0.5));
+    }
+    100% {
+        filter: brightness(1) drop-shadow(0 4px 12px rgba(0, 255, 136, 0.3));
+    }
+}
+
+@keyframes symbolFall {
+    0% {
+        transform: translateY(0) translateX(0) rotate(0deg) scale(0.8);
+        opacity: 0;
+    }
+    10% {
+        opacity: var(--opacity, 0.4);
+        transform: translateY(10vh) translateX(calc(var(--particle-drift, 20px) * 0.1)) rotate(36deg) scale(1);
+    }
+    90% {
+        opacity: var(--opacity, 0.4);
+    }
+    100% {
+        transform: translateY(calc(100vh + 100px)) translateX(var(--particle-drift, 20px)) rotate(720deg) scale(0.9);
+        opacity: 0;
+    }
+}
+
+@keyframes symbolPulse {
+    0%,
+    100% {
+        text-shadow:
+            0 0 10px currentColor,
+            0 0 20px currentColor;
+        transform: scale(1);
+    }
+    50% {
+        text-shadow:
+            0 0 15px currentColor,
+            0 0 30px currentColor,
+            0 0 45px currentColor;
+        transform: scale(1.05);
+    }
+}
+
+// ============================================
+// Main Content
+// ============================================
+.domain-preloader__content {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    max-width: 500px;
+    width: 100%;
+    animation: contentFadeIn $preloader-duration ease-out;
+    transition:
+        opacity $exit-duration ease-out,
+        transform $exit-duration ease-out;
+}
+
+@keyframes contentFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// ============================================
+// Header
+// ============================================
+.domain-preloader__header {
+    text-align: center;
+    margin-bottom: 2rem;
+    animation: headerSlideIn $preloader-duration ease-out 0.2s both;
+}
+
+@keyframes headerSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.domain-preloader__title {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin: 0 0 0.5rem;
+    text-shadow: 0 0 30px currentColor;
+    animation: titleGlow 2s ease-in-out infinite;
+}
+
+@keyframes titleGlow {
+    0%,
+    100% {
+        text-shadow: 0 0 20px currentColor;
+    }
+    50% {
+        text-shadow:
+            0 0 40px currentColor,
+            0 0 60px currentColor;
+    }
+}
+
+.domain-preloader__subtitle {
+    font-size: clamp(0.875rem, 2.5vw, 1rem);
+    font-weight: 400;
+    opacity: 0.8;
+    margin: 0;
+    letter-spacing: 0.02em;
+}
+
+// ============================================
+// Circular Loader
+// ============================================
+.circular-loader {
+    position: relative;
+    width: clamp(200px, 35vw, 260px);
+    height: clamp(200px, 35vw, 260px);
+    margin: 1.5rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.5s ease-out;
+}
+
+.circular-loader__glow-ring {
+    position: absolute;
+    inset: -20px;
+    border-radius: 50%;
+    animation: glowPulse 3s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+    0%,
+    100% {
+        opacity: 0.6;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.02);
+    }
+}
+
+.circular-loader__svg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    &--bg {
+        animation: ringRotate 30s linear infinite reverse;
+    }
+
+    &--progress {
+        animation: ringPulse 2s ease-in-out infinite;
+    }
+}
+
+@keyframes ringRotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes ringPulse {
+    0%,
+    100% {
+        filter: brightness(1) drop-shadow(0 0 10px var(--loader-primary));
+    }
+    50% {
+        filter: brightness(1.2) drop-shadow(0 0 20px var(--loader-primary));
+    }
+}
+
+.circular-loader__progress--complete {
+    animation: completeRing 0.5s ease-out forwards;
+}
+
+@keyframes completeRing {
+    to {
+        filter: brightness(1.3) drop-shadow(0 0 30px var(--loader-primary));
+    }
+}
+
+.circular-loader__dotted-ring {
+    position: absolute;
+    inset: -10px;
+    border: 2px dashed transparent;
+    border-radius: 50%;
+    animation: ringRotate 20s linear infinite;
+}
+
+.circular-loader__particles {
+    position: absolute;
+    inset: 0;
+    animation: ringRotate 10s linear infinite;
+}
+
+.circular-loader__particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    margin: -3px 0 0 -3px;
+    animation: particleOrbit 3s linear infinite;
+    animation-delay: var(--particle-delay, 0s);
+    transform: rotate(var(--particle-angle, 0deg)) translateX(135px) rotate(calc(var(--particle-angle, 0deg) * -1));
+
+    &:nth-child(odd) {
+        animation-direction: normal;
+    }
+
+    &:nth-child(even) {
+        animation-direction: reverse;
+    }
+}
+
+@keyframes particleOrbit {
+    0%,
+    100% {
+        opacity: 0.6;
+        transform: rotate(var(--particle-angle)) translateX(130px) rotate(calc(var(--particle-angle) * -1));
+    }
+    50% {
+        opacity: 1;
+        transform: rotate(var(--particle-angle)) translateX(140px) rotate(calc(var(--particle-angle) * -1));
+    }
+}
+
+.circular-loader__center {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 70%;
+    height: 70%;
+    border-radius: 50%;
+    animation: centerPulse 2s ease-in-out infinite;
+}
+
+@keyframes centerPulse {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.02);
+    }
+}
+
+.circular-loader__logo {
+    margin-bottom: 0.5rem;
+    animation: logoFloat 3s ease-in-out infinite;
+}
+
+@keyframes logoFloat {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+.circular-loader__percentage {
+    font-size: clamp(2rem, 6vw, 2.5rem);
+    font-weight: 800;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+}
+
+.circular-loader__percentage-symbol {
+    font-size: 0.5em;
+    opacity: 0.7;
+    margin-left: 2px;
+}
+
+.circular-loader__site-name {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 0.25rem;
+    opacity: 0.8;
+}
+
+.circular-loader__complete-pulse {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    animation: completePulse 0.6s ease-out forwards;
+}
+
+@keyframes completePulse {
+    0% {
+        box-shadow: 0 0 0 0 var(--loader-primary);
+        opacity: 1;
+    }
+    100% {
+        box-shadow: 0 0 0 100px transparent;
+        opacity: 0;
+    }
+}
+
+// ============================================
+// Loading Progress Bar
+// ============================================
+.loading-progress {
+    position: relative;
+    width: 100%;
+    max-width: 320px;
+    margin: 1.5rem 0 1rem;
+    animation: progressFadeIn $preloader-duration ease-out 0.4s both;
+}
+
+@keyframes progressFadeIn {
+    from {
+        opacity: 0;
+        transform: scaleX(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scaleX(1);
+    }
+}
+
+.loading-progress__container {
+    position: relative;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.loading-progress__background {
+    position: absolute;
+    inset: 0;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+    margin-top: -4px;
+}
+
+.loading-progress__bar {
+    height: 100%;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+    transition: width 0.15s ease-out;
+}
+
+.loading-progress__shimmer {
+    position: absolute;
+    inset: 0;
+    background-size: 200% 100%;
+    animation: shimmer 1.5s linear infinite;
+}
+
+@keyframes shimmer {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(100%);
+    }
+}
+
+// ============================================
+// Loading Status
+// ============================================
+.loading-status {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0.5rem 0;
+    animation: statusFadeIn $preloader-duration ease-out 0.5s both;
+}
+
+@keyframes statusFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.loading-status__message {
+    font-size: 0.875rem;
+    font-weight: 400;
+    text-align: center;
+    opacity: 0.9;
+    animation: messageChange 0.3s ease-out;
+    min-height: 1.5em;
+}
+
+@keyframes messageChange {
+    0% {
+        opacity: 0;
+        transform: translateY(5px);
+        filter: blur(2px);
+    }
+    100% {
+        opacity: 0.9;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+.loading-status__indicators {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    opacity: 0.7;
+}
+
+.loading-status__indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+
+    svg {
+        opacity: 0.9;
+    }
+}
+
+.loading-status__dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.5;
+}
+
+// ============================================
+// Footer
+// ============================================
+.domain-preloader__footer {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    animation: footerFadeIn $preloader-duration ease-out 0.6s both;
+    white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+    .domain-preloader__footer {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        transform: none;
+        margin-top: 2rem;
+    }
+}
+
+@keyframes footerFadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(10px);
+    }
+    to {
+        opacity: 0.6;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+// ============================================
+// Responsive Adjustments
+// ============================================
+@media (max-width: 768px) {
+    .domain-preloader__content {
+        padding: 1.5rem;
+    }
+
+    .domain-preloader__header {
+        margin-bottom: 1.5rem;
+    }
+
+    .circular-loader {
+        margin: 1rem 0;
+    }
+
+    .loading-progress {
+        max-width: 280px;
+        margin: 1rem 0 0.75rem;
+    }
+
+    .loading-status__indicators {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .domain-preloader__gradient-orb {
+        width: 250px !important;
+        height: 250px !important;
+        filter: blur(60px);
+        opacity: 0.2;
+    }
+}
+
+@media (max-width: 480px) {
+    .domain-preloader__title {
+        font-size: 1.25rem;
+        letter-spacing: 0.03em;
+    }
+
+    .domain-preloader__subtitle {
+        font-size: 0.8rem;
+    }
+
+    .loading-status__message {
+        font-size: 0.8rem;
+    }
+
+    .loading-status__indicators {
+        font-size: 0.65rem;
+    }
+}
+
+// ============================================
+// Tablet Landscape
+// ============================================
+@media (min-width: 769px) and (max-width: 1024px) {
+    .domain-preloader__gradient-orb {
+        width: 300px !important;
+        height: 300px !important;
+    }
+}
+
+// ============================================
+// Large Screens
+// ============================================
+@media (min-width: 1920px) {
+    .domain-preloader__content {
+        max-width: 600px;
+    }
+
+    .circular-loader {
+        width: 320px;
+        height: 320px;
+    }
+
+    .loading-progress {
+        max-width: 400px;
+    }
+
+    .domain-preloader__title {
+        font-size: 2.25rem;
+    }
+
+    .domain-preloader__gradient-orb {
+        width: 500px !important;
+        height: 500px !important;
+    }
+}

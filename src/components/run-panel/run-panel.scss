@@ -1,0 +1,802 @@
+@use 'components/shared/styles/mixins' as *;
+
+/**
+* @define -panel
+**/
+.run-panel {
+    --run-panel-mobile-controls-height: 7.6rem;
+    --run-panel-mobile-stat-height: 12.8rem;
+    --run-panel-frame-bg: #111827;
+    --run-panel-frame-border: rgb(99 102 241 / 0.45);
+    --run-panel-frame-border-soft: rgb(99 102 241 / 0.18);
+    --run-panel-surface: #171c2b;
+    --run-panel-surface-2: #20263a;
+    --run-panel-text: #f3f4f6;
+    --run-panel-text-muted: #b6bdd1;
+    --run-panel-accent: #ffb300;
+    --run-panel-toggle: #3366ff;
+    --run-panel-shadow: 0 0 0 1px var(--run-panel-frame-border-soft), 0 1.6rem 3.4rem rgb(0 0 0 / 0.36);
+
+    height: 0;
+
+    &__container {
+        box-sizing: border-box;
+        height: var(--bot-content-height) !important;
+        top: 10.4rem !important;
+        width: 36.6rem !important;
+        right: 0;
+        background: var(--run-panel-frame-bg);
+        border: 2px solid var(--run-panel-frame-border);
+        box-shadow: var(--run-panel-shadow);
+        overflow: visible;
+
+        .dc-drawer__container {
+            overflow: hidden;
+        }
+
+        &--mobile {
+            position: fixed;
+            inset: var(--app-header-height, 4rem) 0 0;
+            width: 100%;
+            z-index: 900;
+            height: calc(100% - var(--app-header-height, 4rem) - env(safe-area-inset-bottom, 0));
+            padding-bottom: env(safe-area-inset-bottom, 0);
+            background: var(--run-panel-frame-bg);
+            border: 2px solid var(--run-panel-frame-border);
+            box-shadow: inset 0 0 0 1px var(--run-panel-frame-border-soft);
+            box-sizing: border-box;
+            isolation: isolate;
+            overflow: hidden;
+
+            > .dc-drawer {
+                position: absolute !important;
+                top: 0 !important;
+                left: 0 !important;
+                width: 100% !important;
+                height: 100% !important;
+                transform: none !important;
+                z-index: 901 !important;
+            }
+
+            .controls__section {
+                z-index: 902;
+            }
+
+            .dc-drawer,
+            .dc-drawer__container,
+            .dc-drawer__content,
+            .run-panel__content,
+            .run-panel-tab__content--mobile,
+            .transactions,
+            .summary,
+            .journal {
+                background-color: var(--run-panel-surface);
+            }
+
+            &-closed {
+                position: unset;
+            }
+        }
+
+        /* Fix for iOS devices to prevent run panel overlap */
+        // @supports (-webkit-touch-callout: none) {
+        //     &--mobile {
+        //         //height: calc(100% - env(safe-area-inset-bottom, 0));
+        //         //padding-bottom: env(safe-area-inset-bottom, 0);
+        //     }
+        // }
+    }
+
+    .dc-drawer__toggle {
+        width: 4rem;
+        height: 7.2rem;
+        min-height: 7.2rem;
+        border: 2px solid var(--run-panel-frame-border);
+        background: linear-gradient(180deg, rgb(255 255 255 / 0.18), rgb(255 255 255 / 0%)), var(--run-panel-toggle);
+        box-shadow:
+            0 0 0 3px rgb(30 136 255 / 18%),
+            0 0.8rem 2.4rem rgb(0 0 0 / 34%);
+        z-index: 20;
+        opacity: 1;
+
+        &:hover {
+            background: linear-gradient(180deg, rgb(255 255 255 / 24%), rgb(255 255 255 / 0%)), #1677e8;
+            box-shadow:
+                0 0 0 4px rgb(30 136 255 / 24%),
+                0 1rem 2.8rem rgb(0 0 0 / 38%);
+        }
+
+        &:focus-visible {
+            outline: 3px solid #7cc0ff;
+            outline-offset: 3px;
+        }
+
+        svg,
+        path {
+            fill: #ffffff;
+        }
+
+        @include mobile-or-tablet-screen {
+            width: 4.8rem;
+            height: 3.2rem;
+            min-height: 3.2rem;
+        }
+    }
+
+    &.dc-drawer--right {
+        .dc-drawer__toggle {
+            transform: translateY(-50%) translateX(-62%);
+
+            @include mobile-or-tablet-screen {
+                transform: translateX(-50%);
+            }
+        }
+    }
+
+    &__tile {
+        @include flex-center;
+
+        flex-direction: column;
+        height: 100%;
+        min-width: 0;
+        padding: 0.6rem 0.4rem;
+        text-align: center;
+
+        &-title {
+            min-height: 1.8rem;
+            margin-bottom: 4px;
+            color: var(--run-panel-text);
+            max-width: 100%;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+            line-height: 1.25;
+
+            @include typeface(--small-center-bold-black, none);
+        }
+
+        &-content {
+            min-height: 1.8rem;
+            height: auto;
+            margin-bottom: 4px;
+            color: var(--run-panel-text);
+            max-width: 100%;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+            line-height: 1.25;
+
+            @include typeface(--small-center-normal-black, none);
+        }
+    }
+
+    &__stat {
+        @include flex-center(flex-start, flex-end);
+
+        flex-direction: column;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        background-color: var(--run-panel-surface-2);
+        color: var(--run-panel-text);
+
+        @include mobile-or-tablet-screen {
+            margin: 0;
+            position: fixed;
+            min-height: var(--run-panel-mobile-stat-height);
+
+            /* Fix for iOS devices to prevent stats panel overlap */
+            @supports (-webkit-touch-callout: none) {
+                padding-bottom: env(safe-area-inset-bottom, 0);
+            }
+        }
+
+        &--info {
+            @include flex-center(center, flex-start);
+
+            width: 100%;
+            padding: 1.2rem 1.6rem 0.2rem;
+            cursor: pointer;
+            color: var(--run-panel-text-muted);
+            -webkit-tap-highlight-color: transparent;
+
+            &-item {
+                display: inline-block;
+                border-bottom: 1px dotted currentColor;
+            }
+
+            @include mobile-or-tablet-screen {
+                width: 100%;
+                min-height: 2.4rem;
+                padding: 0.6rem 0 0;
+            }
+        }
+
+        &--tiles {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            grid-auto-rows: minmax(6.4rem, auto);
+
+            @include mobile-or-tablet-screen {
+                grid-template: 5rem 5rem / repeat(3, minmax(0, 1fr));
+            }
+        }
+
+        &-amount {
+            color: var(--run-panel-text);
+
+            @include typeface(--small-center-normal-black, none);
+
+            &--positive {
+                font-weight: bold;
+                color: var(--text-profit-success);
+            }
+
+            &--negative {
+                font-weight: bold;
+                color: var(--text-loss-danger);
+            }
+        }
+
+        &--mobile {
+            width: 100%;
+            bottom: var(--run-panel-mobile-controls-height);
+            border-top: 1px solid var(--run-panel-frame-border-soft);
+            border-bottom: 1px solid var(--run-panel-frame-border-soft);
+
+            @supports (-webkit-touch-callout: none) {
+                bottom: calc(var(--run-panel-mobile-controls-height) + env(safe-area-inset-bottom, 0));
+            }
+        }
+    }
+
+    &__footer {
+        text-align: center;
+
+        @include flex-center(space-between);
+
+        flex-direction: column;
+
+        &-button {
+            width: min(31.8rem, calc(100% - 4.8rem));
+            height: 32px !important;
+            margin: 12px 24px;
+        }
+    }
+
+    &__content {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        overflow: hidden !important;
+
+        .dc-tabs {
+            &__list {
+                border-bottom: 1px solid var(--run-panel-frame-border-soft);
+
+                @include mobile-or-tablet-screen {
+                    padding-right: 9rem;
+                }
+            }
+
+            &__item {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                padding: 0 0.8rem;
+                color: var(--run-panel-text-muted);
+                font-weight: 600;
+
+                span,
+                .dc-text {
+                    color: var(--run-panel-text-muted) !important;
+                }
+
+                @include mobile-or-tablet-screen {
+                    flex: 1 1 0;
+                    min-width: 0;
+                    font-size: 1.35rem;
+                }
+            }
+
+            &__active {
+                color: var(--run-panel-accent) !important;
+
+                span,
+                .dc-text {
+                    color: var(--run-panel-accent) !important;
+                }
+            }
+
+            &__active-line {
+                background: var(--run-panel-accent);
+            }
+        }
+    }
+
+    &__buttons {
+        display: inline-flex !important;
+        justify-content: space-between;
+        width: 67%;
+        margin-top: 1rem;
+        align-items: center;
+    }
+
+    &-tab {
+        &__content {
+            height: calc(100vh - 42rem);
+            overflow: hidden;
+
+            &--no-stat {
+                height: var(--drawer-content-height-no-stat);
+            }
+
+            &--mobile {
+                display: flex;
+                flex-direction: column;
+                height: var(--drawer-content-height-mobile);
+                position: fixed;
+                bottom: calc(var(--run-panel-mobile-controls-height) + var(--run-panel-mobile-stat-height));
+                width: 100%;
+                padding: 0.4rem 0;
+                overflow: hidden;
+
+                /* Fix for iOS devices to prevent tab content overlap with bottom controls */
+                @supports (-webkit-touch-callout: none) {
+                    bottom: calc(
+                        var(--run-panel-mobile-controls-height) + var(--run-panel-mobile-stat-height) +
+                            env(safe-area-inset-bottom, 0)
+                    );
+                }
+            }
+
+            &--mobile-no-stat {
+                display: flex;
+                flex-direction: column;
+                height: var(--drawer-content-height-mobile-no-stat);
+                position: fixed;
+                bottom: var(--run-panel-mobile-controls-height);
+                width: 100%;
+                padding: 0.4rem 0;
+                overflow: hidden;
+
+                @supports (-webkit-touch-callout: none) {
+                    bottom: calc(var(--run-panel-mobile-controls-height) + env(safe-area-inset-bottom, 0));
+                }
+            }
+
+            &--summary-tab {
+                padding: 0.8rem 1.6rem;
+            }
+        }
+    }
+
+    &__clear-button {
+        @include mobile-or-tablet-screen {
+            position: absolute !important;
+            top: 0.6rem;
+            right: max(1.2rem, env(safe-area-inset-right, 0));
+            height: 3rem !important;
+            min-width: 7.2rem;
+            padding-inline: 1.2rem !important;
+            z-index: 3;
+        }
+    }
+}
+
+.controls {
+    &__section {
+        @include flex-center(space-between);
+
+        flex-direction: column;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background-color: var(--run-panel-frame-bg);
+        border-top: solid 1px var(--run-panel-frame-border-soft);
+        z-index: 8;
+
+        /* Fix for iOS devices to respect safe area */
+        @supports (-webkit-touch-callout: none) {
+            bottom: env(safe-area-inset-bottom, 0);
+            padding-bottom: env(safe-area-inset-bottom, 0);
+        }
+
+        /* Additional class for iOS detection via JS */
+        &.ios-device {
+            bottom: env(safe-area-inset-bottom, 0);
+            padding-bottom: env(safe-area-inset-bottom, 0);
+        }
+    }
+
+    &__buttons {
+        padding: 0.8rem 1.2rem;
+        min-height: 6rem;
+        display: flex;
+        width: inherit;
+        align-items: center;
+
+        @include tablet-screen {
+            max-width: 60rem;
+            padding: 0.8rem 0;
+        }
+
+        /* Fix for iOS devices to ensure buttons are properly sized */
+        @supports (-webkit-touch-callout: none) {
+            height: auto;
+            min-height: 6rem;
+        }
+    }
+
+    &__stop-button,
+    &__run-button {
+        width: 40%;
+        border-radius: 4px 0 0 4px !important;
+    }
+
+    &__animation {
+        width: 100%;
+        min-height: 4rem;
+        border-radius: 0 4px 4px 0;
+    }
+}
+
+.theme--light {
+    .run-panel {
+        --run-panel-frame-bg: linear-gradient(180deg, #edf6ff, #ddebff);
+        --run-panel-frame-border: rgb(52 102 255 / 0.34);
+        --run-panel-frame-border-soft: rgb(52 102 255 / 0.12);
+        --run-panel-surface: #ffffff;
+        --run-panel-surface-2: #eef4ff;
+        --run-panel-text: #1f2a44;
+        --run-panel-text-muted: #667189;
+        --run-panel-accent: #f7ae00;
+        --run-panel-toggle: #2f67e8;
+        --run-panel-shadow: 0 0 0 1px rgb(52 102 255 / 0.1), 0 1.2rem 3rem rgb(59 86 138 / 0.16);
+
+        &__container,
+        &__container--mobile,
+        &__content,
+        &-tab__content,
+        .dc-drawer,
+        .dc-drawer__container,
+        .dc-drawer__content,
+        .summary,
+        .transactions,
+        .journal {
+            background-color: var(--run-panel-surface);
+            color: var(--run-panel-text);
+        }
+
+        &__stat {
+            background-color: var(--run-panel-surface-2);
+            border-top: 1px solid var(--run-panel-frame-border-soft);
+            border-bottom: 1px solid var(--run-panel-frame-border-soft);
+        }
+
+        &__tile-title,
+        &__stat-amount,
+        &__tile-content,
+        .summary,
+        .transactions,
+        .journal {
+            color: var(--run-panel-text);
+        }
+
+        &__stat--info,
+        &__stat--info-item {
+            color: var(--run-panel-text-muted);
+            border-color: currentColor;
+        }
+
+        .dc-tabs__item {
+            color: var(--run-panel-text-muted) !important;
+
+            span,
+            .dc-text {
+                color: var(--run-panel-text-muted) !important;
+            }
+        }
+
+        .dc-tabs__active {
+            color: var(--run-panel-accent) !important;
+
+            span,
+            .dc-text {
+                color: var(--run-panel-accent) !important;
+            }
+        }
+
+        .dc-tabs__active-line {
+            background: var(--run-panel-accent);
+        }
+
+        .dc-drawer__toggle {
+            background:
+                linear-gradient(180deg, rgb(255 255 255 / 0.28), rgb(255 255 255 / 0%)), var(--run-panel-toggle);
+            border-color: var(--run-panel-frame-border);
+            box-shadow:
+                0 0 0 3px rgb(21 89 216 / 18%),
+                0 0.4rem 1.2rem rgb(15 23 42 / 18%);
+
+            svg,
+            path {
+                fill: #ffffff;
+            }
+        }
+
+        .download__button,
+        .download__container__view-detail-button,
+        .journal-tools__container-filter,
+        .run-panel__footer-button,
+        .transactions__header,
+        .transactions__header-column,
+        .transactions__cell,
+        .transactions__spot-value,
+        .transactions-empty,
+        .transactions-empty .dc-text,
+        .summary,
+        .summary .dc-text,
+        .journal,
+        .journal .dc-text,
+        .journal__text,
+        .journal__text-datetime,
+        .journal-empty .dc-text {
+            color: var(--run-panel-text) !important;
+        }
+
+        .journal-tools__container {
+            background: var(--run-panel-surface-2);
+            border-color: var(--run-panel-frame-border-soft);
+        }
+
+        .journal__data-list .ReactVirtualized__Grid__innerScrollContainer > div:nth-child(even) {
+            background: var(--run-panel-surface-2);
+        }
+
+        .journal__text--analysis {
+            color: #064e5f;
+            background: linear-gradient(135deg, rgb(207 250 254 / 0.95), rgb(186 230 253 / 0.9));
+            border-color: rgb(14 116 144 / 0.38);
+        }
+
+        .transactions__item-wrapper:hover {
+            background-color: rgb(52 102 255 / 0.05);
+        }
+    }
+
+    .controls__section {
+        background-color: #ddebff;
+        border-top-color: rgb(52 102 255 / 0.16);
+        color: #1f2a44;
+    }
+
+    .transactions__header {
+        color: var(--run-panel-text);
+    }
+}
+
+.theme--dark {
+    .run-panel {
+        --run-panel-frame-bg: linear-gradient(180deg, #161b29, #101420);
+        --run-panel-frame-border: rgb(87 102 255 / 0.28);
+        --run-panel-frame-border-soft: rgb(87 102 255 / 0.14);
+        --run-panel-surface: #1a2132;
+        --run-panel-surface-2: #222a40;
+        --run-panel-text: #f4f7ff;
+        --run-panel-text-muted: #b3bdd5;
+        --run-panel-accent: #ffb300;
+        --run-panel-toggle: #2759e2;
+        --run-panel-shadow: 0 0 0 1px rgb(87 102 255 / 0.12), 0 1.8rem 4rem rgb(0 0 0 / 0.4);
+
+        .journal__text--analysis {
+            color: #c8f7ff;
+            background: linear-gradient(135deg, rgb(8 47 73 / 0.92), rgb(14 116 144 / 0.42));
+            border-color: rgb(103 232 249 / 0.34);
+            box-shadow: 0 10px 28px rgb(8 145 178 / 0.28);
+        }
+    }
+}
+
+// animation
+.list {
+    &__animation {
+        &-enter {
+            height: 0;
+            transform: translateX(200%);
+
+            &-active {
+                height: auto;
+                transform: translateX(0%);
+                transition:
+                    height 500ms,
+                    transform 500ms;
+            }
+        }
+
+        &-exit {
+            opacity: 1;
+
+            &-active {
+                opacity: 0;
+                transition: opacity 300ms;
+            }
+        }
+    }
+}
+
+.db-self-exclusion {
+    font-size: var(--text-size-xs);
+    font-weight: normal;
+    line-height: 1.43;
+    color: var(--rm-shell-panel-text);
+
+    &__content {
+        margin: 2.4rem;
+        margin-right: 1.4rem;
+        padding-right: 1rem;
+    }
+
+    & .dc-themed-scrollbars__track--vertical {
+        right: -0.2rem;
+    }
+
+    &__dialog {
+        max-height: 500px !important;
+        width: 460px;
+    }
+
+    &__footer {
+        height: 72px;
+        display: block;
+        position: fixed;
+        width: 100%;
+        left: 0;
+        bottom: 0;
+        padding: 1.4rem;
+        border-top: 2px solid var(--rm-shell-section-border);
+
+        /* Fix for iOS devices to respect safe area */
+        @supports (-webkit-touch-callout: none) {
+            bottom: env(safe-area-inset-bottom, 0);
+            padding-bottom: calc(1.4rem + env(safe-area-inset-bottom, 0));
+        }
+
+        @include mobile-or-tablet-screen {
+            position: absolute;
+            width: 100%;
+            bottom: 40px;
+            left: 0;
+
+            /* Fix for iOS devices on mobile */
+            @supports (-webkit-touch-callout: none) {
+                bottom: calc(40px + env(safe-area-inset-bottom, 0));
+            }
+
+            &--relative {
+                position: relative;
+                margin-top: 5rem;
+            }
+        }
+
+        &-btn-group {
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+
+    &__info {
+        margin-bottom: 2rem;
+    }
+
+    &__limit-status {
+        margin: 1rem 0;
+
+        &--bold {
+            font-weight: 700;
+        }
+
+        &--danger {
+            font-weight: 700;
+            color: var(--status-danger);
+        }
+    }
+
+    &--danger {
+        color: var(--status-danger);
+    }
+
+    & .dc-btn {
+        margin-left: 0.8rem;
+    }
+}
+
+.limits__wrapper {
+    @include mobile-or-tablet-screen {
+        position: fixed;
+        z-index: 5;
+        width: 100%;
+        left: 0;
+        top: 0;
+        background: var(--rm-shell-run-panel);
+
+        .db-self-exclusion {
+            height: calc(100vh - 40px);
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+
+            &__content {
+                margin-top: 56px;
+            }
+
+            &__form-group {
+                margin-bottom: 1.6rem;
+                display: flex;
+            }
+        }
+    }
+}
+
+.dc-modal__container_self-exclusion__modal {
+    display: flex;
+    flex-direction: row;
+    align-content: space-between;
+    width: 440px !important;
+    height: 374px !important;
+}
+
+.statistics {
+    &__modal {
+        height: 28.4rem !important;
+        width: 44rem !important;
+        font-size: 1.6rem;
+        padding: 2.4rem;
+
+        &--mobile {
+            font-size: 1.6rem !important;
+        }
+
+        &-body {
+            height: calc(100vh - 40.6rem);
+            min-height: 10rem;
+            max-height: 45rem;
+
+            &--mobile {
+                padding: 0.6rem 0 1.6rem !important;
+                height: 40.4rem;
+            }
+
+            &--content {
+                margin-top: 1rem;
+
+                &-stake {
+                    margin-top: unset;
+                    font-weight: bold;
+                }
+            }
+        }
+
+        &-scrollbar {
+            padding-right: 1.2rem;
+        }
+    }
+}
+
+.dc-modal__container_statistics__modal {
+    @include mobile-or-tablet-screen {
+        width: min(31.2rem, calc(100vw - 1.6rem)) !important;
+    }
+
+    .dc-modal-body {
+        padding: 2.4rem 1.2rem 2.4rem 2.4rem;
+    }
+}
+
+.dc-dialog {
+    &__button {
+        @include mobile-or-tablet-screen {
+            flex-basis: 100%;
+            white-space: normal;
+            word-break: break-word;
+        }
+    }
+}

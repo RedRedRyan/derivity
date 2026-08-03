@@ -1,0 +1,400 @@
+<xml xmlns="https://developers.google.com/blockly/xml" is_dbot="true" collection="false">
+  <variables>
+    <variable id="c#Ys.#I2Fw=#Yw+Adu-z">Prediction Before Loss</variable>
+    <variable id="pvt3a?ytm8v9%Rj[JAZO">Prediction After Loss</variable>
+    <variable id="D}i(,0zxWcpOPpjam9f3">Stake</variable>
+    <variable id="jtAxC52%g[yKx6?-Wq(3">Prediction </variable>
+    <variable id="DH(Te1XB+VpLMG/jXR@p">Stake 2.2</variable>
+    <variable id="It#St*mF!,,rI2c.J?fa">Start</variable>
+    <variable id="lY9:aABE~DL;B5ks]39y">Matingale</variable>
+  </variables>
+  <block type="trade_definition" id="D}L`@8s{NrZ8[x9-,c-=" deletable="false" x="0" y="60">
+    <statement name="TRADE_OPTIONS">
+      <block type="trade_definition_market" id="qsLRa0L4hwR%9[qW1?;(" deletable="false" movable="false">
+        <field name="MARKET_LIST">synthetic_index</field>
+        <field name="SUBMARKET_LIST">random_index</field>
+        <field name="SYMBOL_LIST">1HZ100V</field>
+        <next>
+          <block type="trade_definition_tradetype" id="ZXQu!re.5[-ujg1txA4|" deletable="false" movable="false">
+            <field name="TRADETYPECAT_LIST">digits</field>
+            <field name="TRADETYPE_LIST">overunder</field>
+            <next>
+              <block type="trade_definition_contracttype" id="R2ovT]1+c,A7zh)7MKgB" deletable="false" movable="false">
+                <field name="TYPE_LIST">both</field>
+                <next>
+                  <block type="trade_definition_candleinterval" id="JWA.ujN,}[;b(r#xJ9;M" deletable="false" movable="false">
+                    <field name="CANDLEINTERVAL_LIST">60</field>
+                    <next>
+                      <block type="trade_definition_restartbuysell" id="!UqER22w=vozg176X~)Y" deletable="false" movable="false">
+                        <field name="TIME_MACHINE_ENABLED">FALSE</field>
+                        <next>
+                          <block type="trade_definition_restartonerror" id="ogRtZTw?SC:uic|Zc4_E" deletable="false" movable="false">
+                            <field name="RESTARTONERROR">TRUE</field>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="INITIALIZATION">
+      <block type="variables_set" id="0MriYk}(WvF?BtiG64yL">
+        <field name="VAR" id="c#Ys.#I2Fw=#Yw+Adu-z">Prediction Before Loss</field>
+        <value name="VALUE">
+          <block type="math_number" id=",0uIHAH048ig*WFTZ+b=">
+            <field name="NUM">1</field>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="RZ7aUDHF9`Dp3BiQlf+7">
+            <field name="VAR" id="pvt3a?ytm8v9%Rj[JAZO">Prediction After Loss</field>
+            <value name="VALUE">
+              <block type="math_number" id="FD)U)OUrWKJrAsAE6.Rd">
+                <field name="NUM">3</field>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set" id="Z;]0jn%q[Yr^.+?xe*1I">
+                <field name="VAR" id="jtAxC52%g[yKx6?-Wq(3">Prediction </field>
+                <value name="VALUE">
+                  <block type="variables_get" id="P__*e1TWRym}4z3w^EpN">
+                    <field name="VAR" id="c#Ys.#I2Fw=#Yw+Adu-z">Prediction Before Loss</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="variables_set" id=";b(en%#-l*QPa3`A[/*h">
+                    <field name="VAR" id="D}i(,0zxWcpOPpjam9f3">Stake</field>
+                    <value name="VALUE">
+                      <block type="math_number" id="Z!m]SKM?SrvUU8Q{FmPV">
+                        <field name="NUM">10</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="variables_set" id="]3*~K1,3/tr,mg#~0PC(">
+                        <field name="VAR" id="lY9:aABE~DL;B5ks]39y">Matingale</field>
+                        <value name="VALUE">
+                          <block type="math_number" id="KI0vMHX?M[j2PB.KwFlo">
+                            <field name="NUM">2.1</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="variables_set" id="%j0rh%DQ)62=aNn51~e3" collapsed="true">
+                            <field name="VAR" id="DH(Te1XB+VpLMG/jXR@p">Stake 2.2</field>
+                            <value name="VALUE">
+                              <block type="variables_get" id="UwmZX7OoP2`~;CHZ%Xe;">
+                                <field name="VAR" id="D}i(,0zxWcpOPpjam9f3">Stake</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="variables_set" id="[i.~*8U,?qSyYw`k7FYP" collapsed="true">
+                                <field name="VAR" id="It#St*mF!,,rI2c.J?fa">Start</field>
+                                <value name="VALUE">
+                                  <block type="math_number" id="8dD`U4D.#iBaBV:#xHug">
+                                    <field name="NUM">0</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="SUBMARKET">
+      <block type="trade_definition_tradeoptions" id="s,)3Y=V4P6X=;7Q9}I{)">
+        <mutation xmlns="http://www.w3.org/1999/xhtml" has_first_barrier="false" has_second_barrier="false" has_prediction="true"></mutation>
+        <field name="DURATIONTYPE_LIST">t</field>
+        <value name="DURATION">
+          <shadow type="math_number_positive" id="{EuJiUng1YH64A?i@j)n">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="AMOUNT">
+          <shadow type="math_number_positive" id="{pG.N+^$r5O.OHm8C4Ze">
+            <field name="NUM">1</field>
+          </shadow>
+          <block type="variables_get" id="G$|P=]BCv/:*0^o8r-a^">
+            <field name="VAR" id="D}i(,0zxWcpOPpjam9f3">Stake</field>
+          </block>
+        </value>
+        <value name="PREDICTION">
+          <shadow type="math_number_positive" id="hqeB:*v2}vK-x)g?X)|g" inline="true">
+            <field name="NUM">1</field>
+          </shadow>
+          <block type="variables_get" id=".~s;[zB^D!#sz=zo.E_I">
+            <field name="VAR" id="jtAxC52%g[yKx6?-Wq(3">Prediction </field>
+          </block>
+        </value>
+      </block>
+    </statement>
+  </block>
+  <block type="after_purchase" id="Ms%OXNPL|BUlakZqY]eH" collapsed="true" x="718" y="60">
+    <statement name="AFTERPURCHASE_STACK">
+      <block type="controls_if" id="rm_after_win_or_loss">
+        <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
+        <value name="IF0">
+          <block type="contract_check_result" id="rm_contract_is_win">
+            <field name="CHECK_RESULT">win</field>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="controls_if" id="rm_recovered_profit_check">
+            <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
+            <value name="IF0">
+              <block type="logic_compare" id="rm_total_profit_positive">
+                <field name="OP">GT</field>
+                <value name="A">
+                  <block type="total_profit" id="rm_total_profit_after_win"></block>
+                </value>
+                <value name="B">
+                  <block type="math_number" id="rm_zero_profit_target">
+                    <field name="NUM">0</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="variables_set" id="rm_reset_stake_after_recovery">
+                <field name="VAR" id="D}i(,0zxWcpOPpjam9f3">Stake</field>
+                <value name="VALUE">
+                  <block type="variables_get" id="rm_base_stake_after_recovery">
+                    <field name="VAR" id="DH(Te1XB+VpLMG/jXR@p">Stake 2.2</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="variables_set" id="rm_reset_start_after_recovery">
+                    <field name="VAR" id="It#St*mF!,,rI2c.J?fa">Start</field>
+                    <value name="VALUE">
+                      <block type="math_number" id="rm_start_normal_mode">
+                        <field name="NUM">0</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="variables_set" id="rm_reset_prediction_after_recovery">
+                        <field name="VAR" id="jtAxC52%g[yKx6?-Wq(3">Prediction </field>
+                        <value name="VALUE">
+                          <block type="variables_get" id="rm_before_prediction_after_recovery">
+                            <field name="VAR" id="c#Ys.#I2Fw=#Yw+Adu-z">Prediction Before Loss</field>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <statement name="ELSE">
+              <block type="variables_set" id="rm_keep_after_loss_prediction_until_profit">
+                <field name="VAR" id="jtAxC52%g[yKx6?-Wq(3">Prediction </field>
+                <value name="VALUE">
+                  <block type="variables_get" id="rm_after_loss_prediction_until_profit">
+                    <field name="VAR" id="pvt3a?ytm8v9%Rj[JAZO">Prediction After Loss</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="variables_set" id="rm_keep_recovery_mode_until_profit">
+                    <field name="VAR" id="It#St*mF!,,rI2c.J?fa">Start</field>
+                    <value name="VALUE">
+                      <block type="math_number" id="rm_recovery_mode_still_negative">
+                        <field name="NUM">1</field>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+          </block>
+        </statement>
+        <statement name="ELSE">
+          <block type="variables_set" id="rm_martingale_after_loss">
+            <field name="VAR" id="D}i(,0zxWcpOPpjam9f3">Stake</field>
+            <value name="VALUE">
+              <block type="math_arithmetic" id="rm_stake_times_martingale">
+                <field name="OP">MULTIPLY</field>
+                <value name="A">
+                  <shadow type="math_number" id="rm_stake_shadow">
+                    <field name="NUM">1</field>
+                  </shadow>
+                  <block type="variables_get" id="rm_current_stake_before_martingale">
+                    <field name="VAR" id="D}i(,0zxWcpOPpjam9f3">Stake</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <shadow type="math_number" id="rm_martingale_shadow">
+                    <field name="NUM">1</field>
+                  </shadow>
+                  <block type="variables_get" id="rm_martingale_multiplier">
+                    <field name="VAR" id="lY9:aABE~DL;B5ks]39y">Matingale</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set" id="rm_set_prediction_after_loss">
+                <field name="VAR" id="jtAxC52%g[yKx6?-Wq(3">Prediction </field>
+                <value name="VALUE">
+                  <block type="variables_get" id="rm_prediction_after_loss_value">
+                    <field name="VAR" id="pvt3a?ytm8v9%Rj[JAZO">Prediction After Loss</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="variables_set" id="rm_set_recovery_mode_after_loss">
+                    <field name="VAR" id="It#St*mF!,,rI2c.J?fa">Start</field>
+                    <value name="VALUE">
+                      <block type="math_number" id="rm_start_recovery_mode">
+                        <field name="NUM">1</field>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <next>
+          <block type="trade_again" id="{P+)aO9[tTOYtZ;k:yXw"></block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="before_purchase" id="C]2ZmyWR/Fw|-BS19~Az" deletable="false" x="0" y="976">
+    <statement name="BEFOREPURCHASE_STACK">
+      <block type="controls_if" id="rm_check_both_prediction_percentages" collapsed="true">
+        <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
+        <value name="IF0">
+          <block type="logic_operation" id="rm_before_and_after_percentages_ready">
+            <field name="OP">AND</field>
+            <value name="A">
+              <block type="logic_compare" id="rm_before_loss_percentage_ready">
+                <field name="OP">GTE</field>
+                <value name="A">
+                  <block type="over_under_percentage" id="rm_before_loss_over_percentage">
+                    <field name="CONDITION">over</field>
+                    <value name="DIGIT">
+                      <shadow type="math_number" id="rm_before_prediction_shadow">
+                        <field name="NUM">1</field>
+                      </shadow>
+                      <block type="variables_get" id="rm_before_prediction_digit">
+                        <field name="VAR" id="c#Ys.#I2Fw=#Yw+Adu-z">Prediction Before Loss</field>
+                      </block>
+                    </value>
+                    <value name="COUNT">
+                      <shadow type="math_number" id="rm_before_count_shadow">
+                        <field name="NUM">1000</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="math_number" id="rm_before_threshold_display">
+                    <field name="NUM">80</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <value name="B">
+              <block type="logic_compare" id="rm_after_loss_percentage_ready">
+                <field name="OP">GTE</field>
+                <value name="A">
+                  <block type="over_under_percentage" id="rm_after_loss_over_percentage">
+                    <field name="CONDITION">over</field>
+                    <value name="DIGIT">
+                      <shadow type="math_number" id="rm_after_prediction_shadow">
+                        <field name="NUM">3</field>
+                      </shadow>
+                      <block type="variables_get" id="rm_after_prediction_digit">
+                        <field name="VAR" id="pvt3a?ytm8v9%Rj[JAZO">Prediction After Loss</field>
+                      </block>
+                    </value>
+                    <value name="COUNT">
+                      <shadow type="math_number" id="rm_after_count_shadow">
+                        <field name="NUM">1000</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="math_number" id="rm_after_threshold_display">
+                    <field name="NUM">60</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="controls_if" id="rm_purchase_normal_or_recovery">
+            <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
+            <value name="IF0">
+              <block type="logic_compare" id="rm_is_normal_mode">
+                <field name="OP">EQ</field>
+                <value name="A">
+                  <block type="variables_get" id="rm_start_mode_value">
+                    <field name="VAR" id="It#St*mF!,,rI2c.J?fa">Start</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="math_number" id="rm_normal_mode_number">
+                    <field name="NUM">0</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="purchase" id="AWJ;PWj{r:A!Cpj5QBjm">
+                <field name="PURCHASE_LIST">DIGITOVER</field>
+              </block>
+            </statement>
+            <statement name="ELSE">
+              <block type="controls_if" id="rm_after_loss_last_digit_filter">
+                <value name="IF0">
+                  <block type="last_digits_condition" id="_6V^E^RgqlY0NNf{Bzd+">
+                    <field name="CONDITION">lt</field>
+                    <value name="COUNT">
+                      <shadow type="math_number" id="9:aUf%^(JlEDv[+KZ42)">
+                        <field name="NUM">1</field>
+                      </shadow>
+                    </value>
+                    <value name="DIGIT">
+                      <shadow type="math_number" id="(=8xSBUthyqHn4000m[b">
+                        <field name="NUM">3</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="purchase" id=":LjLJ`_2r@}JL01;tH?.">
+                    <field name="PURCHASE_LIST">DIGITOVER</field>
+                  </block>
+                </statement>
+              </block>
+            </statement>
+          </block>
+        </statement>
+        <statement name="ELSE">
+          <block type="notify" id="rm_percentages_not_ready_notice">
+            <field name="NOTIFICATION_TYPE">error</field>
+            <field name="NOTIFICATION_SOUND">silent</field>
+            <value name="MESSAGE">
+              <block type="text" id="rm_percentages_not_ready_message">
+                <field name="TEXT">Bot stopped: Prediction Before Loss and Prediction After Loss must both meet the system percentage requirement before any contract is purchased.</field>
+              </block>
+            </value>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+</xml>

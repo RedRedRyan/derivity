@@ -1,0 +1,78 @@
+modules = ["nodejs-20", "web", "bash"]
+[agent]
+expertMode = true
+stack = "BEST_EFFORT_FALLBACK"
+integrations = ["javascript_database:1.0.0"]
+
+[nix]
+channel = "stable-25_05"
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Start application"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Start backend"
+
+[[workflows.workflow]]
+name = "Start application"
+author = "agent"
+
+[workflows.workflow.metadata]
+outputType = "webview"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm start"
+waitForPort = 5000
+
+[[workflows.workflow]]
+name = "Start backend"
+author = "agent"
+
+[workflows.workflow.metadata]
+outputType = "console"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd backend && node server/index.js"
+waitForPort = 8000
+
+[[ports]]
+localPort = 3000
+externalPort = 3000
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+
+[[ports]]
+localPort = 8000
+externalPort = 8000
+
+[[ports]]
+localPort = 10000
+externalPort = 3002
+
+[deployment]
+deploymentTarget = "autoscale"
+build = ["sh", "-c", "npm run build && cd backend && npm install --production"]
+publicDir = "dist"
+run = ["sh", "-c", "NODE_ENV=production node backend/server/index.js"]
+
+[userenv]
+
+[userenv.shared]
+APP_ID = "71937"
+CLIENT_ID = "33cCr2bWsByPgLlormNFw"
+APP_ENV = "production"
+CORS_ORIGIN = "https://riskmanagers.site,https://www.riskmanagers.site"

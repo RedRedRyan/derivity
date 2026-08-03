@@ -1,0 +1,276 @@
+[
+    {
+        "id": "new-under-8-special-bot-2026",
+        "name": "New Under 8 Special Bot 2026",
+        "file": "New under 8 special bot 2026.xml",
+        "description": "Premium Risk Managers Under 8 strategy with adaptive prediction and protected profit and loss controls.",
+        "emoji": "GOLD",
+        "is_premium": true,
+        "priority": 0
+    },
+    {
+        "id": "d10-by-mrduke",
+        "name": "D10 BY mrduke",
+        "file": "D10 BY mrduke.xml",
+        "description": "Risk Managers alternating digit bot that cycles between Even/Odd, Over4/Under5, and Rise/Fall with switch-count control, martingale sizing, and take-profit / stop-loss guards.",
+        "emoji": "RM",
+        "priority": 2
+    },
+    {
+        "name": "Percentage Over by Mr Duke",
+        "file": "Percentage Over by Mr Duke.xml",
+        "description": "Risk Managers percentage-over strategy with an elevated VIP presentation."
+    },
+    {
+        "id": "double-under-bot",
+        "name": "Double Under bot",
+        "file": "Double Under bot.xml",
+        "description": "Risk Managers digit bot with editable Over/Under direction and win/loss prediction digits, plus two-tick direction confirmation before entries.",
+        "emoji": "VIP",
+        "is_premium": true,
+        "priority": 1
+    },
+    {
+        "name": "grffy v1",
+        "file": "grffy v1.xml"
+    },
+    {
+        "name": "Mr Duke Speed Bot.1",
+        "file": "Mr Duke Speed Bot.1.xml"
+    },
+    {
+        "name": "Wealth Generator",
+        "file": "Wealth Generator.xml"
+    },
+    {
+        "id": "accumulators-bt",
+        "name": "ACCUMULATORS BT",
+        "file": "ACCUMULATORS BT.xml",
+        "description": "Restored Risk Managers strategy \u2014 ACCUMULATORS BT loads into Bot Builder and runs through the standard purchase conditions.",
+        "emoji": "RM"
+    },
+    {
+        "id": "black-devil-v2-by-mr-duke",
+        "name": "BLACK DEVIL v2( By MR. DUKE)",
+        "file": "BLACK DEVIL v2( By MR. DUKE).xml",
+        "description": "Restored Risk Managers strategy \u2014 BLACK DEVIL v2( By MR. DUKE) loads into Bot Builder and runs through the standard purchase conditions.",
+        "emoji": "RM"
+    },
+    {
+        "id": "candle-mine-version-3-1",
+        "name": "Candle Mine Version 3.1",
+        "file": "Candle Mine Version 3.1.xml",
+        "description": "Restored Risk Managers strategy \u2014 Candle Mine Version 3.1 loads into Bot Builder and runs through the standard purchase conditions.",
+        "emoji": "RM"
+    },
+    {
+        "id": "d1-2025-bot",
+        "name": "D1 2025 BOT",
+        "file": "D1 2025 BOT.xml",
+        "description": "Restored Risk Managers strategy \u2014 D1 2025 BOT loads into Bot Builder and runs through the standard purchase conditions.",
+        "emoji": "RM"
+    },
+    {
+        "id": "d1-by-mr-duke-254702490526",
+        "name": "D1 BY MR.DUKE(+254702490526)",
+        "file": "D1 BY MR.DUKE(+254702490526).xml",
+        "description": "Restored Risk Managers strategy \u2014 D1 BY MR.DUKE(+254702490526) loads into Bot Builder and runs through the standard purchase conditions.",
+        "emoji": "RM"
+    },
+    {
+        "id": "d1-by-mr-duke-254702490526",
+        "name": "D1-BY MR.DUKE(+254702490526)",
+        "file": "D1-BY MR.DUKE(+254702490526).xml",
+        "description": "Restored Risk Managers strategy \u2014 D1-BY MR.DUKE(+254702490526) loads into Bot Builder and runs through the standard purchase conditions.",
+        "emoji": "RM"
+    },
+    {
+        "id": "d2-by-mr-duke-254702490526",
+        "name": "D2 BY MR.DUKE(+254702490526)",
+        "file": "D2 BY MR.DUKE(+254702490526).xml",
+        "description": "Restored Risk Managers strategy \u2014 D2 BY MR.DUKE(+254702490526) loads into Bot Builder and runs through the standard purchase conditions.",
+        "emoji": "RM"
+    },
+    {
+        "id": "d2-by-mr-duke-254702490526-1",
+        "name": "D2 BY--MR.DUKE(+254702490526) (1)",
+        "file": "D2 BY--MR.DUKE(+254702490526) (1).xml",
+        "description": "Restored Risk Managers strategy \u2014 D2 BY--MR.DUKE(+254702490526) (1) loads into Bot Builder and runs through the standard purchase conditions.",
+        "emoji": "RM"
+    },
+    {
+        "id": "d4-update-by-mr-duke-254702490526-final-1-1-1",
+        "name": "D4 Update by MR.DUKE(+254702490526)FINAL  (%%%)) (1) (1) (1)",
+        "file": "D4 Update by MR.DUKE(+254702490526)FINAL  (%%%)) (1) (1) (1).xml",
+        "description": "Restored Risk Managers strategy \u2014 D4 Update by MR.DUKE(+254702490526)FINAL  (%%%)) (1) (1) (1) loads into Bot Builder and runs through the standard purchase conditions.",
+        "emoji": "RM"
+    },
+    {
+        "id": "d4-update-by-mr-duke-254702490526-final",
+        "name": "D4 Update by MR.DUKE(+254702490526)FINAL (%%%))",
+        "file": "D4 Update by MR.DUKE(+254702490526)FINAL (%%%)).xml",
+        "description": "Restored Risk Managers strategy \u2014 D4 Update by MR.DUKE(+254702490526)FINAL (%%%)) loads into Bot Builder and runs through the standard purchase conditions.",
+        "emoji": "RM"
+    },
+    {
+        "id": "d5-original-version-254702490526",
+        "name": "D5 (Original version +254702490526)",
+        "file": "D5 (Original version +254702490526).xml",
+        "description": "Restored Risk Managers strategy \u2014 D5 (Original version +254702490526) loads into Bot Builder and runs through the standard purchase conditions.",
+        "emoji": "RM"
+    },
+    {
+        "id": "d6-deriv-by-duke-1",
+        "name": "D6 Deriv by Duke (1)",
+        "file": "D6 Deriv by Duke (1).xml",
+        "description": "Restored Risk Managers strategy \u2014 D6 Deriv by Duke (1) loads into Bot Builder and runs through the standard purchase conditions.",
+        "emoji": "RM"
+    },
+    {
+        "id": "d6-deriv-by-duke",
+        "name": "D6 Deriv by Duke",
+        "file": "D6 Deriv by Duke.xml",
+        "description": "Restored Risk Managers strategy \u2014 D6 Deriv by Duke loads into Bot Builder and runs through the standard purchase conditions.",
+        "emoji": "RM"
+    },
+    {
+        "id": "d7-over-2-bot",
+        "name": "D7 Over 2 bot",
+        "file": "D7 Over 2 bot.xml",
+        "description": "Restored Risk Managers strategy \u2014 D7 Over 2 bot loads into Bot Builder and runs through the standard purchase conditions.",
+        "emoji": "RM"
+    },
+    {
+        "id": "differhub",
+        "name": "Differhub",
+        "file": "Differhub.xml",
+        "description": "Restored Risk Managers strategy \u2014 Differhub loads into Bot Builder and runs through the standard purchase conditions.",
+        "emoji": "RM"
+    },
+    {
+        "id": "double-over-with-analysis",
+        "name": "Double Over With analysis",
+        "file": "Double Over With analysis.xml",
+        "description": "Restored Risk Managers strategy \u2014 Double Over With analysis loads into Bot Builder and runs through the standard purchase conditions.",
+        "emoji": "RM"
+    },
+    {
+        "id": "even-odd-killer-bot",
+        "name": "Even Odd Killer bot",
+        "file": "Even Odd Killer bot.xml",
+        "description": "Restored Risk Managers strategy \u2014 Even Odd Killer bot loads into Bot Builder and runs through the standard purchase conditions.",
+        "emoji": "RM"
+    },
+    {
+        "id": "even-odd-reverse-psychology",
+        "name": "Even Odd Reverse psychology",
+        "file": "Even Odd Reverse psychology.xml",
+        "description": "Restored Risk Managers strategy \u2014 Even Odd Reverse psychology loads into Bot Builder and runs through the standard purchase conditions.",
+        "emoji": "RM"
+    },
+    {
+        "id": "gibu-v8-pro-2024",
+        "name": "Gibu V8 PRO (2024)",
+        "file": "Gibu V8 PRO (2024).xml",
+        "description": "Restored Risk Managers strategy \u2014 Gibu V8 PRO (2024) loads into Bot Builder and runs through the standard purchase conditions.",
+        "emoji": "RM"
+    },
+    {
+        "id": "kumi-na-nne-bora-v2-1-1",
+        "name": "KUMI NA NNE BORA V2  (1) (1)",
+        "file": "KUMI NA NNE BORA V2  (1) (1).xml",
+        "description": "Restored Risk Managers strategy \u2014 KUMI NA NNE BORA V2  (1) (1) loads into Bot Builder and runs through the standard purchase conditions.",
+        "emoji": "RM"
+    },
+    {
+        "id": "kiazala-v1-by-the-risk-manager-1",
+        "name": "Kiazala v1 by The Risk Manager (1)",
+        "file": "Kiazala v1 by The Risk Manager (1).xml",
+        "description": "Restored Risk Managers strategy \u2014 Kiazala v1 by The Risk Manager (1) loads into Bot Builder and runs through the standard purchase conditions.",
+        "emoji": "RM"
+    },
+    {
+        "id": "mkorean-sv5-2024",
+        "name": "Mkorean SV5 2024",
+        "file": "Mkorean SV5 2024.xml",
+        "description": "Restored Risk Managers strategy \u2014 Mkorean SV5 2024 loads into Bot Builder and runs through the standard purchase conditions.",
+        "emoji": "RM"
+    },
+    {
+        "id": "mkorean-sv7-2025",
+        "name": "Mkorean SV7 2025",
+        "file": "Mkorean SV7 2025.xml",
+        "description": "Restored Risk Managers strategy \u2014 Mkorean SV7 2025 loads into Bot Builder and runs through the standard purchase conditions.",
+        "emoji": "RM"
+    },
+    {
+        "id": "mkorean-sv7-bot",
+        "name": "Mkorean sv7 bot",
+        "file": "Mkorean sv7 bot.xml",
+        "description": "Restored Risk Managers strategy \u2014 Mkorean sv7 bot loads into Bot Builder and runs through the standard purchase conditions.",
+        "emoji": "RM"
+    },
+    {
+        "id": "mwenda-pole-by-the-risk-manager-1",
+        "name": "Mwenda Pole By The Risk Manager (1)",
+        "file": "Mwenda Pole By The Risk Manager (1).xml",
+        "description": "Restored Risk Managers strategy \u2014 Mwenda Pole By The Risk Manager (1) loads into Bot Builder and runs through the standard purchase conditions.",
+        "emoji": "RM"
+    },
+    {
+        "id": "new-dollar-printer-bot-vxy",
+        "name": "New Dollar Printer Bot.VXY($)",
+        "file": "New Dollar Printer Bot.VXY($).xml",
+        "description": "Restored Risk Managers strategy \u2014 New Dollar Printer Bot.VXY($) loads into Bot Builder and runs through the standard purchase conditions.",
+        "emoji": "RM"
+    },
+    {
+        "id": "over-1-recovery-over-4",
+        "name": "OVER 1 RECOVERY OVER 4",
+        "file": "OVER 1 RECOVERY OVER 4.xml",
+        "description": "Restored Risk Managers strategy \u2014 OVER 1 RECOVERY OVER 4 loads into Bot Builder and runs through the standard purchase conditions.",
+        "emoji": "RM"
+    },
+    {
+        "id": "simba-ai-v1",
+        "name": "Simba Ai v1",
+        "file": "Simba Ai v1.xml",
+        "description": "Restored Risk Managers strategy \u2014 Simba Ai v1 loads into Bot Builder and runs through the standard purchase conditions.",
+        "emoji": "RM"
+    },
+    {
+        "id": "speedhack-by-mrduke-site-00-1",
+        "name": "Speedhack by mrduke.site 00 (1)",
+        "file": "Speedhack by mrduke.site 00 (1).xml",
+        "description": "Restored Risk Managers strategy \u2014 Speedhack by mrduke.site 00 (1) loads into Bot Builder and runs through the standard purchase conditions.",
+        "emoji": "RM"
+    },
+    {
+        "id": "the-d3-rise-and-fall",
+        "name": "The-D3 rise and fall",
+        "file": "The-D3 rise and fall.xml",
+        "description": "Restored Risk Managers strategy \u2014 The-D3 rise and fall loads into Bot Builder and runs through the standard purchase conditions.",
+        "emoji": "RM"
+    },
+    {
+        "id": "wealth-generator-v2",
+        "name": "WEALTH GENERATOR V2",
+        "file": "WEALTH GENERATOR V2.xml",
+        "description": "Restored Risk Managers strategy \u2014 WEALTH GENERATOR V2 loads into Bot Builder and runs through the standard purchase conditions.",
+        "emoji": "RM"
+    },
+    {
+        "id": "grffy-upated-martingale-2-loss-premium-bot",
+        "name": "grffy upated martingale 2 loss premium bot",
+        "file": "grffy upated martingale 2 loss premium bot.xml",
+        "description": "Restored Risk Managers strategy \u2014 grffy upated martingale 2 loss premium bot loads into Bot Builder and runs through the standard purchase conditions.",
+        "emoji": "RM"
+    },
+    {
+        "id": "under-7-8-9-g2-bot-1",
+        "name": "under 7,8,9= g2 bot 1==",
+        "file": "under 7,8,9= g2 bot 1==.xml",
+        "description": "Restored Risk Managers strategy \u2014 under 7,8,9= g2 bot 1== loads into Bot Builder and runs through the standard purchase conditions.",
+        "emoji": "RM"
+    }
+]

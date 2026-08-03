@@ -1,0 +1,44 @@
+[
+    {
+        "id": "masterhunter-v1",
+        "name": "MASTERHUNTER V1",
+        "file": "MASTERHUNTER V1.xml",
+        "description": "Master Hunter V1 strategy ready to load into Bot Builder.",
+        "emoji": "MH"
+    },
+    {
+        "id": "masterhunter-v2",
+        "name": "MASTERHUNTER V2",
+        "file": "MASTERHUNTER V2.xml",
+        "description": "Master Hunter V2 strategy ready to load into Bot Builder.",
+        "emoji": "MH"
+    },
+    {
+        "id": "masterhunter-v5",
+        "name": "MASTERHUNTER V5",
+        "file": "MASTERHUNTER V5.xml",
+        "description": "Master Hunter V5 strategy ready to load into Bot Builder.",
+        "emoji": "MH"
+    },
+    {
+        "id": "masterhunter-v8",
+        "name": "MASTERHUNTER V8",
+        "file": "MASTERHUNTER V8.xml",
+        "description": "Master Hunter V8 strategy ready to load into Bot Builder.",
+        "emoji": "MH"
+    },
+    {
+        "id": "masterhanter-rise-and-fall",
+        "name": "MASTERHANTER RISE AND FALL",
+        "file": "MASTERHANTER RISE AND FALL .xml",
+        "description": "Master Hanter Rise and Fall strategy ready to load into Bot Builder.",
+        "emoji": "MH"
+    },
+    {
+        "id": "states-digit-switcher",
+        "name": "States Digit Switcher",
+        "file": "States Digit Switcher.xml",
+        "description": "States Digit Switcher strategy ready to load into Bot Builder.",
+        "emoji": "MH"
+    }
+]

@@ -1,0 +1,52 @@
+.app-header {
+    &__logo {
+        padding-inline-start: 1.6rem;
+        padding-inline-end: 1.6rem;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        transition: all 0.3s ease;
+
+        &:hover {
+            opacity: 0.8;
+        }
+
+        img {
+            height: 30px;
+            width: auto;
+            object-fit: contain;
+            object-position: center left;
+            max-width: 180px;
+        }
+
+        &-text {
+            margin-left: 8px;
+        }
+    }
+}
+
+.powered-by-text {
+    font-size: 1.25rem;
+    letter-spacing: 0.4px;
+    color: var(--text-prominent);
+    font-style: italic;
+    font-weight: 900;
+    white-space: nowrap;
+    padding: 0.4rem 1.2rem;
+    border-radius: 4px;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+    text-transform: none;
+
+    &:hover {
+        background: transparent;
+        border-color: transparent;
+        color: var(--text-prominent);
+        transform: translateY(-1px);
+        box-shadow: none;
+    }
+}

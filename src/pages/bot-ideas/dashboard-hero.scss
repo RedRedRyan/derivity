@@ -1,0 +1,275 @@
+// ─── Dashboard Hero Wrapper ──────────────────────────────────────────────────
+.dh-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+
+// ─── Typing Hero ─────────────────────────────────────────────────────────────
+.dh-hero {
+    text-align: center;
+    padding: 4rem 2rem 2rem;
+
+    &__title {
+        font-size: clamp(2.8rem, 5vw, 5.2rem);
+        font-weight: 800;
+        color: #fff;
+        margin: 0 0 1.6rem;
+        letter-spacing: -0.02em;
+        min-height: 1.2em;
+        background: linear-gradient(135deg, #00d4ff 0%, #ffffff 60%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    &__cursor {
+        display: inline-block;
+        opacity: 0;
+        color: #00d4ff;
+        -webkit-text-fill-color: #00d4ff;
+        font-weight: 300;
+        transition: opacity 0.1s;
+
+        &--visible {
+            opacity: 1;
+        }
+    }
+
+    &__subtitle {
+        font-size: 1.6rem;
+        color: #8899bb;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.8rem;
+
+        em {
+            font-style: italic;
+        }
+    }
+
+    &__rocket {
+        font-style: normal;
+        font-size: 2rem;
+    }
+}
+
+// ─── Quick Access Cards ───────────────────────────────────────────────────────
+.dh-cards {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.4rem;
+    padding: 0 2rem;
+
+    @media (max-width: 1100px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media (max-width: 700px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 480px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.dh-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(0, 212, 255, 0.12);
+    border-radius: 1.4rem;
+    padding: 1.8rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    transition:
+        background 0.22s ease,
+        border-color 0.22s ease,
+        transform 0.18s ease,
+        box-shadow 0.22s ease;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(0, 212, 255, 0.04) 0%, transparent 60%);
+        opacity: 0;
+        transition: opacity 0.22s ease;
+    }
+
+    &:hover {
+        background: rgba(0, 212, 255, 0.06);
+        border-color: rgba(0, 212, 255, 0.35);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 32px rgba(0, 212, 255, 0.1);
+
+        &::before {
+            opacity: 1;
+        }
+
+        .dh-card__arrow {
+            transform: translateX(3px);
+        }
+    }
+
+    &:active {
+        transform: translateY(-1px);
+    }
+
+    &__icon {
+        font-size: 3rem;
+        line-height: 1;
+        filter: drop-shadow(0 0 8px currentColor);
+    }
+
+    &__body {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+        flex: 1;
+    }
+
+    &__title {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #fff;
+        display: block;
+    }
+
+    &__desc {
+        font-size: 1.15rem;
+        color: #8899bb;
+        display: block;
+        line-height: 1.5;
+    }
+
+    &__arrow {
+        font-size: 1.6rem;
+        font-weight: 700;
+        transition: transform 0.18s ease;
+        align-self: flex-end;
+    }
+}
+
+// ─── Testimonials ─────────────────────────────────────────────────────────────
+.dh-testimonials {
+    padding: 0 2rem;
+
+    &__title {
+        font-size: 1.8rem;
+        font-weight: 800;
+        color: #fff;
+        text-align: center;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin: 0 0 3rem;
+        position: relative;
+
+        &::after {
+            content: '';
+            display: block;
+            width: 6rem;
+            height: 3px;
+            background: linear-gradient(90deg, #00d4ff, #0a78d4);
+            border-radius: 2px;
+            margin: 1.2rem auto 0;
+        }
+    }
+
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.6rem;
+
+        @media (max-width: 900px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @media (max-width: 580px) {
+            grid-template-columns: 1fr;
+        }
+    }
+}
+
+.dh-testimonial {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(0, 212, 255, 0.1);
+    border-radius: 1.4rem;
+    padding: 2.4rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+    transition:
+        border-color 0.22s ease,
+        transform 0.18s ease,
+        box-shadow 0.22s ease;
+
+    &:hover {
+        border-color: rgba(0, 212, 255, 0.28);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 24px rgba(0, 212, 255, 0.07);
+    }
+
+    &__stars {
+        display: flex;
+        gap: 0.3rem;
+    }
+
+    &__star {
+        font-size: 1.6rem;
+        color: rgba(255, 215, 0, 0.2);
+
+        &--filled {
+            color: #ffd700;
+            filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.5));
+        }
+    }
+
+    &__quote {
+        font-size: 1.4rem;
+        color: #c4cfe0;
+        line-height: 1.65;
+        margin: 0;
+        flex: 1;
+    }
+
+    &__author {
+        display: flex;
+        align-items: center;
+        gap: 1.2rem;
+        margin-top: auto;
+    }
+
+    &__avatar {
+        width: 4rem;
+        height: 4rem;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: #fff;
+        flex-shrink: 0;
+    }
+
+    &__name {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #fff;
+    }
+
+    &__role {
+        font-size: 1.2rem;
+        color: #8899bb;
+        margin-top: 0.2rem;
+    }
+}

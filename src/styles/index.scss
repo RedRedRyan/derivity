@@ -1,0 +1,134 @@
+@use 'components/shared/styles/themes' as *;
+// Removed IBM Plex Sans Google Font import - now using brand font from brand.config.json
+// Third-party developers can add their own font imports if needed
+
+body {
+    // Updated to use brand font variable from brand.config.json
+    font-family: var(--brand-font-primary);
+    background: var(--rm-shell-run-panel);
+}
+
+html,
+#root {
+    background: var(--rm-shell-run-panel);
+}
+
+:root,
+.theme--light,
+.theme--dark {
+    --rm-shell-top: #111111;
+    --rm-shell-top-light: #ffffff;
+    --rm-shell-nav: #1f1978;
+    --rm-shell-nav-active: #11105f;
+    --rm-shell-nav-hover: #15136b;
+    --rm-shell-gold: #ffb300;
+    --rm-shell-text: #ffffff;
+    --rm-shell-header-text: #ffffff;
+    --rm-shell-nav-text: #ffffff;
+    --rm-shell-panel-text: #ffffff;
+    --rm-shell-panel-text-muted: rgba(255, 255, 255, 0.82);
+    --rm-shell-surface: #111111;
+    --rm-shell-surface-2: #181818;
+    --rm-shell-border: #2c3440;
+    --rm-shell-input-bg: #0f1a2b;
+    --rm-shell-input-text: #ffffff;
+    --rm-shell-button-text: #ffffff;
+    --rm-shell-circle-bg: #333333;
+    --rm-shell-circle-text: #ffffff;
+    --rm-shell-muted: #9a9a9a;
+    --rm-shell-auth-blue: #003b73;
+    --rm-shell-auth-border: #8f8f8f;
+    --rm-shell-run: #00b8ad;
+    --rm-shell-run-hover: #0bc7bc;
+    --rm-shell-run-panel: #083a70;
+    --rm-shell-run-panel-light: #d9ecff;
+    --rm-shell-section: #0a2f59;
+    --rm-shell-section-2: #0d477f;
+    --rm-shell-section-muted: #0f5796;
+    --rm-shell-section-border: rgba(124, 192, 255, 0.32);
+    --rm-shell-run-panel-border: #1e88ff;
+    --rm-shell-run-panel-border-soft: rgba(30, 136, 255, 0.24);
+    --rm-shell-progress-track: #dfe3e6;
+    --rm-shell-progress-dot: #222222;
+}
+
+.theme--light {
+    --rm-shell-top: #ffffff;
+    --rm-shell-text: #111827;
+    --rm-shell-header-text: #111827;
+    --rm-shell-nav-text: #ffffff;
+    --rm-shell-panel-text: #111827;
+    --rm-shell-panel-text-muted: #374151;
+    --rm-shell-surface: #ffffff;
+    --rm-shell-surface-2: #f3f4f6;
+    --rm-shell-border: #cbd5e1;
+    --rm-shell-input-bg: #ffffff;
+    --rm-shell-input-text: #111827;
+    --rm-shell-button-text: #ffffff;
+    --rm-shell-circle-bg: #303030;
+    --rm-shell-circle-text: #ffffff;
+    --rm-shell-run-panel: #d9ecff;
+    --rm-shell-run-panel-light: #eef7ff;
+    --rm-shell-section: #e7f3ff;
+    --rm-shell-section-2: #cfe6ff;
+    --rm-shell-section-muted: #bddcff;
+    --rm-shell-section-border: rgba(21, 89, 216, 0.24);
+    --rm-shell-run-panel-border: #1559d8;
+    --rm-shell-run-panel-border-soft: rgba(21, 89, 216, 0.18);
+    --rm-shell-muted: #4b5563;
+    --rm-shell-auth-blue: #1559b7;
+    --rm-shell-auth-border: #b8c2cf;
+    --rm-shell-progress-track: #e0e0e0;
+    --rm-shell-progress-dot: #444444;
+}
+
+.deriv-header {
+    height: var(--app-header-height, 40px) !important;
+    min-height: var(--app-header-height, 40px) !important;
+    background: var(--rm-shell-top) !important;
+    border-bottom: 0 !important;
+    box-shadow: none !important;
+}
+
+.theme--light .deriv-header {
+    background: var(--rm-shell-top-light) !important;
+}
+
+.theme--light {
+    color: var(--rm-shell-text);
+
+    .dc-btn--primary,
+    .dc-btn--primary__light,
+    .dc-btn--tertiary {
+        color: var(--rm-shell-button-text) !important;
+    }
+
+    input,
+    select,
+    textarea {
+        color: var(--rm-shell-input-text);
+        background-color: var(--rm-shell-input-bg);
+    }
+}
+
+.icon-general-fill-path {
+    path {
+        fill: var(--text-general);
+    }
+}
+
+.icon-general-fill-g-path {
+    g {
+        path {
+            fill: var(--text-general);
+        }
+    }
+}
+
+.icon-orange-fill-g-path {
+    g {
+        path {
+            fill: var(--rm-shell-gold);
+        }
+    }
+}

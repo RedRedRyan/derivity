@@ -1,0 +1,1002 @@
+<xml xmlns="https://developers.google.com/blockly/xml" is_dbot="true" collection="false">
+  <variables>
+    <variable id="_y{yZ1EsKxSe[:sXL4FW">Stake</variable>
+    <variable id="~M:l72hdy/V?SH;YT7E;">text</variable>
+    <variable id="!WFSF{Aj1t6U@W6~KfX#">text1</variable>
+    <variable id="u)E@j8#v1I}p+:WXZ,J1">text2</variable>
+    <variable id="mj-JqB)7B|`)$P[,Pp4O">text3</variable>
+    <variable id="A=K:tg,dI4+]f*=#f^IG">text4</variable>
+    <variable id="kNZ3{D`xVOU.@3u#H2F7">text5</variable>
+    <variable id=";wd#gs$-@(_sdj^sf;XW">text6</variable>
+    <variable id="V-b~G4^|JkgH2KG=YyNW">text7</variable>
+    <variable id="vSo{.QQ|Lt$6rG`2){;f">text8</variable>
+    <variable id="ir^JKn4_@f39KJ]9w)]+">text9</variable>
+    <variable id="n@LooLxt_X@$@BetZJq*">text10</variable>
+    <variable id="d0UR^iVdSa4P=SDZK,Po">text11</variable>
+    <variable id="BV,=e+(b_D:!mMn7)+9+">text12</variable>
+    <variable id="YBjQ-IL-Udhv)g0`M2P}">text13</variable>
+    <variable id="mJ5|XC#lqsrd}5PP=-Ys">text14</variable>
+    <variable id="?QewE)[fvxc/Y]2qFxo~">text15</variable>
+  </variables>
+  <block type="trade_definition" id="cutZT-}(TW^K(Vdkb(@^" deletable="false" x="0" y="60">
+    <statement name="TRADE_OPTIONS">
+      <block type="trade_definition_market" id="EnkAV)Mw$83vs[Y~WIEF" deletable="false" movable="false">
+        <field name="MARKET_LIST">synthetic_index</field>
+        <field name="SUBMARKET_LIST">random_index</field>
+        <field name="SYMBOL_LIST">R_100</field>
+        <next>
+          <block type="trade_definition_tradetype" id="0H`xeqH=?tV-O08o=@S?" deletable="false" movable="false">
+            <field name="TRADETYPECAT_LIST">digits</field>
+            <field name="TRADETYPE_LIST">overunder</field>
+            <next>
+              <block type="trade_definition_contracttype" id="IjqsGXs:jg3FM!W5|cc(" deletable="false" movable="false">
+                <field name="TYPE_LIST">DIGITOVER</field>
+                <next>
+                  <block type="trade_definition_candleinterval" id="~[nC{V_Z:$ouQG[1hGRF" deletable="false" movable="false">
+                    <field name="CANDLEINTERVAL_LIST">60</field>
+                    <next>
+                      <block type="trade_definition_restartbuysell" id="lB|k1@}Ad{b*?9Fa]V4s" deletable="false" movable="false">
+                        <field name="TIME_MACHINE_ENABLED">FALSE</field>
+                        <next>
+                          <block type="trade_definition_restartonerror" id="1Z)#@KrloPN-A0i[ACMU" deletable="false" movable="false">
+                            <field name="RESTARTONERROR">TRUE</field>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="INITIALIZATION">
+      <block type="variables_set" id="_*~S[FTNq9GTgsMM6N=E">
+        <field name="VAR" id="_y{yZ1EsKxSe[:sXL4FW">Stake</field>
+        <value name="VALUE">
+          <block type="math_number" id=".:HsSxW-,QJEZfdXsnaY">
+            <field name="NUM">1</field>
+          </block>
+        </value>
+      </block>
+    </statement>
+    <statement name="SUBMARKET">
+      <block type="trade_definition_tradeoptions" id="PZWVpEAyMvPE8R#h,04e">
+        <mutation xmlns="http://www.w3.org/1999/xhtml" has_first_barrier="false" has_second_barrier="false" has_prediction="true"></mutation>
+        <field name="DURATIONTYPE_LIST">t</field>
+        <value name="DURATION">
+          <shadow type="math_number" id="afKIFmni0-aAHa,(Jv^q">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="AMOUNT">
+          <shadow type="math_number" id="2b?}psADJ8CmQ^mPo~.#">
+            <field name="NUM">1</field>
+          </shadow>
+          <block type="variables_get" id="RBEo|iK@6{9Y;!G];(VQ">
+            <field name="VAR" id="_y{yZ1EsKxSe[:sXL4FW">Stake</field>
+          </block>
+        </value>
+        <value name="PREDICTION">
+          <shadow type="math_number" id="t]c|X}Kl[O)oPIysb*{u">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+      </block>
+    </statement>
+  </block>
+  <block type="during_purchase" id="i{3prJV5i8Kz|,{wqFz5" collapsed="true" x="818" y="60">
+    <statement name="DURING_PURCHASE_STACK">
+      <block type="controls_if" id="4A$X8N-C)A/Scz$O}@a:">
+        <value name="IF0">
+          <block type="check_sell" id="O%%!Bz|(^JNo0%-_I5Yc"></block>
+        </value>
+      </block>
+    </statement>
+  </block>
+  <block type="after_purchase" id="Yx}P~.f=a5szMo),x/Qx" x="818" y="156">
+    <statement name="AFTERPURCHASE_STACK">
+      <block type="controls_if" id="z$z:W:N|TH?oI#5IQH#T">
+        <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
+        <value name="IF0">
+          <block type="contract_check_result" id="Zh#yy]=O@H;ynYGBhNf.">
+            <field name="CHECK_RESULT">win</field>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="variables_set" id="yFubw%X8HS)s.:/9li:}">
+            <field name="VAR" id="_y{yZ1EsKxSe[:sXL4FW">Stake</field>
+            <value name="VALUE">
+              <block type="math_number" id="5MPdT{xS)5B*Ol$wP`O7">
+                <field name="NUM">1</field>
+              </block>
+            </value>
+          </block>
+        </statement>
+        <statement name="ELSE">
+          <block type="variables_set" id="[.;]Qk1H6BrVDi9Zr^.3">
+            <field name="VAR" id="_y{yZ1EsKxSe[:sXL4FW">Stake</field>
+            <value name="VALUE">
+              <block type="math_arithmetic" id="d6N!Vc8=~WnA:g+:bKBl">
+                <field name="OP">MULTIPLY</field>
+                <value name="A">
+                  <shadow type="math_number" id="DQX]x;@Uv.{$U#okHgI0">
+                    <field name="NUM">1</field>
+                  </shadow>
+                  <block type="variables_get" id="c(T?uNXX)YN,PfY`VUNb">
+                    <field name="VAR" id="_y{yZ1EsKxSe[:sXL4FW">Stake</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <shadow type="math_number" id="duhO_0N_sVT3Ud,y4}jI">
+                    <field name="NUM">12</field>
+                  </shadow>
+                </value>
+              </block>
+            </value>
+          </block>
+        </statement>
+        <next>
+          <block type="trade_again" id="ukyluUv|k=![zB#IT-:)"></block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="before_purchase" id="Ack[6DSii0mf4m+)!MDL" deletable="false" x="0" y="688">
+    <statement name="BEFOREPURCHASE_STACK">
+      <block type="controls_if" id="M7lCsK]lPsY7b5JZpvBY">
+        <mutation xmlns="http://www.w3.org/1999/xhtml" elseif="1"></mutation>
+        <value name="IF0">
+          <block type="logic_operation" id="bl_jj0M:FVGMU_l:34g_">
+            <field name="OP">AND</field>
+            <value name="A">
+              <block type="check_direction" id="F`%Q4;nD[E-`LjScRcOF">
+                <field name="CHECK_DIRECTION">fall</field>
+              </block>
+            </value>
+            <value name="B">
+              <block type="logic_compare" id="u)AmJq;^:9H_Cz~c}y+H">
+                <field name="OP">EQ</field>
+                <value name="A">
+                  <block type="last_digit" id="3Zyh)bA(@moU2Lt:rO4~"></block>
+                </value>
+                <value name="B">
+                  <block type="math_number" id="W#AILrt8AZW:kG(o!!02">
+                    <field name="NUM">1</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="apollo_purchase" id="`l=6|lm[OHkq=^h;ylP]">
+            <field name="PURCHASE_LIST">DIGITOVER</field>
+          </block>
+        </statement>
+        <value name="IF1">
+          <block type="logic_operation" id="JIth+vyBlPJpu9B2zf_.">
+            <field name="OP">AND</field>
+            <value name="A">
+              <block type="check_direction" id="d~}OTfst~5i;^DSdD{gI">
+                <field name="CHECK_DIRECTION">rise</field>
+              </block>
+            </value>
+            <value name="B">
+              <block type="logic_compare" id="0P1uP1$,k:?WntfqReV[">
+                <field name="OP">EQ</field>
+                <value name="A">
+                  <block type="last_digit" id="cP=E+kTpjPR5RcxZ+)%-"></block>
+                </value>
+                <value name="B">
+                  <block type="math_number" id="]{K07h5R7lD8UzO4h6yT">
+                    <field name="NUM">1</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO1">
+          <block type="apollo_purchase" id="/hZjd|xCT#i,9Xr8r/Uk">
+            <field name="PURCHASE_LIST">DIGITOVER</field>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+  <block type="tick_analysis" id="7x.BBJ-C`QFl3GX.p4Y#" x="0" y="1076">
+    <statement name="TICKANALYSIS_STACK">
+      <block type="controls_if" id="PF`?+zDj3;aBqj?ESd2Z">
+        <mutation xmlns="http://www.w3.org/1999/xhtml" elseif="1"></mutation>
+        <value name="IF0">
+          <block type="check_direction" id=":6bg0*#M5M=~)s!L?766">
+            <field name="CHECK_DIRECTION">rise</field>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="text_join" id="rFQV92w*^BM/+Zcz+mDC">
+            <field name="VARIABLE" id="~M:l72hdy/V?SH;YT7E;">text</field>
+            <statement name="STACK">
+              <block type="text_statement" id="sy8lra:.}Y|f5:6B5dP#">
+                <value name="TEXT">
+                  <shadow type="text" id="|89RkzYlj`=]K;kzo/wt">
+                    <field name="TEXT"></field>
+                  </shadow>
+                  <block type="text" id="~^+tUz)UlD4TU@w-s@X/">
+                    <field name="TEXT">Last digit is: </field>
+                  </block>
+                </value>
+                <next>
+                  <block type="text_statement" id="h?YIv!{kr$/=Levb~Pc.">
+                    <value name="TEXT">
+                      <shadow type="text" id="x=P;[1:{|]mD=a?Q-ouf">
+                        <field name="TEXT"></field>
+                      </shadow>
+                      <block type="last_digit" id="67U,|]S/yw~@d$bzhtS~"></block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <next>
+              <block type="notify" id=";*7;6UzDZT%g;{RhLA]g">
+                <field name="NOTIFICATION_TYPE">info</field>
+                <field name="NOTIFICATION_SOUND">silent</field>
+                <value name="MESSAGE">
+                  <shadow type="text" id="QtG;[AOuZ$r]Wy%%Yqh|">
+                    <field name="TEXT">abc</field>
+                  </shadow>
+                  <block type="variables_get" id=",nus1#I4mC#A[m4+=L$4">
+                    <field name="VAR" id="~M:l72hdy/V?SH;YT7E;">text</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <value name="IF1">
+          <block type="check_direction" id="@D-C3eW`?mt_pjF0)Ip=">
+            <field name="CHECK_DIRECTION">fall</field>
+          </block>
+        </value>
+        <statement name="DO1">
+          <block type="text_join" id="@lg[mt@7KT1o8~gu,JH/">
+            <field name="VARIABLE" id="!WFSF{Aj1t6U@W6~KfX#">text1</field>
+            <statement name="STACK">
+              <block type="text_statement" id="*8ae^EOCDXtNr$o*oP/^">
+                <value name="TEXT">
+                  <shadow type="text" id="4;i+leOW{aGKrqh[N45@">
+                    <field name="TEXT"></field>
+                  </shadow>
+                  <block type="text" id="8t=(3k:[o/s6Ksjmnv*.">
+                    <field name="TEXT">Last digit is: </field>
+                  </block>
+                </value>
+                <next>
+                  <block type="text_statement" id="ToB_*:nN|]V*}P)j^_nJ">
+                    <value name="TEXT">
+                      <shadow type="text" id="v_.;tF9|#nnta$hYQM]D">
+                        <field name="TEXT"></field>
+                      </shadow>
+                      <block type="last_digit" id="@?fo;il.s~b+@z,[)KmW"></block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <next>
+              <block type="notify" id="+H[8S+FT@#InhbniF)-}">
+                <field name="NOTIFICATION_TYPE">error</field>
+                <field name="NOTIFICATION_SOUND">silent</field>
+                <value name="MESSAGE">
+                  <shadow type="text" id="YICpZKb#cOofk`viO+|e">
+                    <field name="TEXT">abc</field>
+                  </shadow>
+                  <block type="variables_get" id="`!T$)_@a,_-0![[t#o{P">
+                    <field name="VAR" id="!WFSF{Aj1t6U@W6~KfX#">text1</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+  <block type="tick_analysis" id="H[+B@*%!X1O:cAv1:HnW" x="0" y="1788">
+    <statement name="TICKANALYSIS_STACK">
+      <block type="controls_if" id="2HZAq4_CUgRS7MJ=gJ)n">
+        <mutation xmlns="http://www.w3.org/1999/xhtml" elseif="1"></mutation>
+        <value name="IF0">
+          <block type="check_direction" id="T6(T0q=N_qKmCjqGNI[H">
+            <field name="CHECK_DIRECTION">rise</field>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="text_join" id="of.SIQtorJ=~kzxoC~FZ">
+            <field name="VARIABLE" id="u)E@j8#v1I}p+:WXZ,J1">text2</field>
+            <statement name="STACK">
+              <block type="text_statement" id="?jF6RiG6sY0/aM/UY(sE">
+                <value name="TEXT">
+                  <shadow type="text" id="Q)6Mk.ss;FhN?p_X7[c(">
+                    <field name="TEXT"></field>
+                  </shadow>
+                  <block type="text" id="cXrx*9d?5=`hoYO2_9h[">
+                    <field name="TEXT">Last digit is: </field>
+                  </block>
+                </value>
+                <next>
+                  <block type="text_statement" id="]R1QVvEXsN#Yp]tUP=$|">
+                    <value name="TEXT">
+                      <shadow type="text" id="f}3/mKUm/_,nm$?2e8u(">
+                        <field name="TEXT"></field>
+                      </shadow>
+                      <block type="last_digit" id="wY8pIH|nCVj{;{+K],bb"></block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <next>
+              <block type="notify" id="T{D9Pbie(u!nIQS5H]RF">
+                <field name="NOTIFICATION_TYPE">info</field>
+                <field name="NOTIFICATION_SOUND">silent</field>
+                <value name="MESSAGE">
+                  <shadow type="text" id="i/YU)LWM!/*I7pm/-eFg">
+                    <field name="TEXT">abc</field>
+                  </shadow>
+                  <block type="variables_get" id="Idjirc[8TrUdFZVZ4Hn,">
+                    <field name="VAR" id="u)E@j8#v1I}p+:WXZ,J1">text2</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <value name="IF1">
+          <block type="check_direction" id="q-jc(GU5H3l2Jv:;3[^n">
+            <field name="CHECK_DIRECTION">fall</field>
+          </block>
+        </value>
+        <statement name="DO1">
+          <block type="text_join" id="zZ^+L05e=@g{;$E2c;vi">
+            <field name="VARIABLE" id="mj-JqB)7B|`)$P[,Pp4O">text3</field>
+            <statement name="STACK">
+              <block type="text_statement" id="tIFePL_UIFvWclV!IM?/">
+                <value name="TEXT">
+                  <shadow type="text" id="Jp.P%e^lX}_HARzRo;(%">
+                    <field name="TEXT"></field>
+                  </shadow>
+                  <block type="text" id=")*[qiDlFdVOJ]1*.bBdH">
+                    <field name="TEXT">Last digit is: </field>
+                  </block>
+                </value>
+                <next>
+                  <block type="text_statement" id="[mnK,X!Lk+p/9z.l}/lX">
+                    <value name="TEXT">
+                      <shadow type="text" id=".Ei#=.aGDzVnf9=?SCdq">
+                        <field name="TEXT"></field>
+                      </shadow>
+                      <block type="last_digit" id="*L|X{;Qj|pA3vKm1D+Z3"></block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <next>
+              <block type="notify" id="tpE=3DCx_jpvNf]!;Stu">
+                <field name="NOTIFICATION_TYPE">error</field>
+                <field name="NOTIFICATION_SOUND">silent</field>
+                <value name="MESSAGE">
+                  <shadow type="text" id="2!@uPZ-v=|z+}I]U=;V[">
+                    <field name="TEXT">abc</field>
+                  </shadow>
+                  <block type="variables_get" id="=03$=Y;k@C!5e(aI/^13">
+                    <field name="VAR" id="mj-JqB)7B|`)$P[,Pp4O">text3</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+  <block type="tick_analysis" id="!B@c!zn8?uMZZ=?*zZ|M" x="0" y="2500">
+    <statement name="TICKANALYSIS_STACK">
+      <block type="controls_if" id="s=!~.:u!9Bsrj#[~XD$A">
+        <mutation xmlns="http://www.w3.org/1999/xhtml" elseif="1"></mutation>
+        <value name="IF0">
+          <block type="check_direction" id="g6XKTw^}+:bpb}{Ek/Za">
+            <field name="CHECK_DIRECTION">rise</field>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="text_join" id="rBTx5?`VP_!c^Lbj30[I">
+            <field name="VARIABLE" id="A=K:tg,dI4+]f*=#f^IG">text4</field>
+            <statement name="STACK">
+              <block type="text_statement" id="}kVq5Fl6/lw-R{m=B}dG">
+                <value name="TEXT">
+                  <shadow type="text" id="-Qk.e#eV!U%:IK$gUhb`">
+                    <field name="TEXT"></field>
+                  </shadow>
+                  <block type="text" id="ndmui])41=GsOI@/y54]">
+                    <field name="TEXT">Last digit is: </field>
+                  </block>
+                </value>
+                <next>
+                  <block type="text_statement" id="h49)*U2bkCvhRRs#sVgR">
+                    <value name="TEXT">
+                      <shadow type="text" id="i70jH/:$hk];D?,`_Qy1">
+                        <field name="TEXT"></field>
+                      </shadow>
+                      <block type="last_digit" id="Csf8g)$H|o5]FIvmD5K["></block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <next>
+              <block type="notify" id="P8-J#xOrdnqi_cJ%^EXu">
+                <field name="NOTIFICATION_TYPE">info</field>
+                <field name="NOTIFICATION_SOUND">silent</field>
+                <value name="MESSAGE">
+                  <shadow type="text" id="]F/5J?A!Q.kL+6]w/-*1">
+                    <field name="TEXT">abc</field>
+                  </shadow>
+                  <block type="variables_get" id="hc:%a8bQKcwA|-7]aP-d">
+                    <field name="VAR" id="A=K:tg,dI4+]f*=#f^IG">text4</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <value name="IF1">
+          <block type="check_direction" id="C#+YPzk+0FO4O0zQZTdY">
+            <field name="CHECK_DIRECTION">fall</field>
+          </block>
+        </value>
+        <statement name="DO1">
+          <block type="text_join" id="LC$yY9*Yp07OR].huDtB">
+            <field name="VARIABLE" id="kNZ3{D`xVOU.@3u#H2F7">text5</field>
+            <statement name="STACK">
+              <block type="text_statement" id="9YoA.G.M|prEee3vBd}!">
+                <value name="TEXT">
+                  <shadow type="text" id="^D).P+NQ{i0yiP3ry@A;">
+                    <field name="TEXT"></field>
+                  </shadow>
+                  <block type="text" id="DUA*mJ1cwSj{(3SiO(C@">
+                    <field name="TEXT">Last digit is: </field>
+                  </block>
+                </value>
+                <next>
+                  <block type="text_statement" id="w@SkL~{Zm1QC)n`XVxSf">
+                    <value name="TEXT">
+                      <shadow type="text" id="y{,YJ5{=g}1@.cCR6*-p">
+                        <field name="TEXT"></field>
+                      </shadow>
+                      <block type="last_digit" id="g!-~*)D1Fvve+/T[S|d#"></block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <next>
+              <block type="notify" id="mb^=ah$7zl~s$1]WUm9;">
+                <field name="NOTIFICATION_TYPE">error</field>
+                <field name="NOTIFICATION_SOUND">silent</field>
+                <value name="MESSAGE">
+                  <shadow type="text" id="8LMFK@[ksUS[)*~hlST-">
+                    <field name="TEXT">abc</field>
+                  </shadow>
+                  <block type="variables_get" id="?{7!4eE|Mi/n`e!`qm#$">
+                    <field name="VAR" id="kNZ3{D`xVOU.@3u#H2F7">text5</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+  <block type="tick_analysis" id="iL:=bbRlop:$Q}AL=dq_" x="0" y="3212">
+    <statement name="TICKANALYSIS_STACK">
+      <block type="controls_if" id="yyI+_Jm.zY5K$oh(-=R1">
+        <mutation xmlns="http://www.w3.org/1999/xhtml" elseif="1"></mutation>
+        <value name="IF0">
+          <block type="check_direction" id="DEjf?X,QM2PKt%~cFa;@">
+            <field name="CHECK_DIRECTION">rise</field>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="text_join" id="xj)VStc`(bc=s0[8aYpu">
+            <field name="VARIABLE" id=";wd#gs$-@(_sdj^sf;XW">text6</field>
+            <statement name="STACK">
+              <block type="text_statement" id="k~3-1Q8*v?_tLp[a2P.2">
+                <value name="TEXT">
+                  <shadow type="text" id="fQDr;}Y,l7;2wL=8neoc">
+                    <field name="TEXT"></field>
+                  </shadow>
+                  <block type="text" id="(TG4Z%Bvq,V]+k@!dt^u">
+                    <field name="TEXT">Last digit is: </field>
+                  </block>
+                </value>
+                <next>
+                  <block type="text_statement" id="sR5#r;{*czp[g7Xq(jnF">
+                    <value name="TEXT">
+                      <shadow type="text" id="XOaTP?.,*=)Z2*daE5Zh">
+                        <field name="TEXT"></field>
+                      </shadow>
+                      <block type="last_digit" id="bMk8tXT`Rd%F,U[enS}q"></block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <next>
+              <block type="notify" id="cP*(e1wvU,nU6O6OG[m{">
+                <field name="NOTIFICATION_TYPE">info</field>
+                <field name="NOTIFICATION_SOUND">silent</field>
+                <value name="MESSAGE">
+                  <shadow type="text" id="WLZEAmCrb/b-**;b2(IV">
+                    <field name="TEXT">abc</field>
+                  </shadow>
+                  <block type="variables_get" id="r=+5N:F1SFj^}PS`A@lv">
+                    <field name="VAR" id=";wd#gs$-@(_sdj^sf;XW">text6</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <value name="IF1">
+          <block type="check_direction" id=",k2K@E(m@W;7Jbg8bs*K">
+            <field name="CHECK_DIRECTION">fall</field>
+          </block>
+        </value>
+        <statement name="DO1">
+          <block type="text_join" id="WboTJO$QK45Eo1)Nob:I">
+            <field name="VARIABLE" id="V-b~G4^|JkgH2KG=YyNW">text7</field>
+            <statement name="STACK">
+              <block type="text_statement" id="#7EX/kke^;d70j|%+Ct^">
+                <value name="TEXT">
+                  <shadow type="text" id="@n$#wW70Spoy+/PzV~:2">
+                    <field name="TEXT"></field>
+                  </shadow>
+                  <block type="text" id=".WO}nOzvcVRTpv^F+3^Q">
+                    <field name="TEXT">Last digit is: </field>
+                  </block>
+                </value>
+                <next>
+                  <block type="text_statement" id="!uAZq;T#TeW,kv=^@eCj">
+                    <value name="TEXT">
+                      <shadow type="text" id="AhOG*6__YMrKU^a?7f=U">
+                        <field name="TEXT"></field>
+                      </shadow>
+                      <block type="last_digit" id="_8Xv]Y4ifx8J0Jdh1P7R"></block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <next>
+              <block type="notify" id="ngwa,%grK|UZ*|ujG;w=">
+                <field name="NOTIFICATION_TYPE">error</field>
+                <field name="NOTIFICATION_SOUND">silent</field>
+                <value name="MESSAGE">
+                  <shadow type="text" id="UDc9f5^Oeb-AID/B#b8K">
+                    <field name="TEXT">abc</field>
+                  </shadow>
+                  <block type="variables_get" id="#8B,~CK8k~Cg{u?+C!LG">
+                    <field name="VAR" id="V-b~G4^|JkgH2KG=YyNW">text7</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+  <block type="tick_analysis" id=":0j}o!6Z+.g6wkU$WDoI" x="0" y="3924">
+    <statement name="TICKANALYSIS_STACK">
+      <block type="controls_if" id="TEo0)61aMb#D?NwKQ?r{">
+        <mutation xmlns="http://www.w3.org/1999/xhtml" elseif="1"></mutation>
+        <value name="IF0">
+          <block type="check_direction" id="{P/Dlp.LtBa|ON|ug)6*">
+            <field name="CHECK_DIRECTION">rise</field>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="text_join" id="RTL3eGqsP.mVJJ1D%~0^">
+            <field name="VARIABLE" id="vSo{.QQ|Lt$6rG`2){;f">text8</field>
+            <statement name="STACK">
+              <block type="text_statement" id="sPS:[7Owz|_WmJ,b^E20">
+                <value name="TEXT">
+                  <shadow type="text" id="zJWwiWgehWh,tnHr0lpq">
+                    <field name="TEXT"></field>
+                  </shadow>
+                  <block type="text" id="KtV{Mt-yaMbw77Vc{XN;">
+                    <field name="TEXT">Last digit is: </field>
+                  </block>
+                </value>
+                <next>
+                  <block type="text_statement" id="p62%0GSO:!p@)$#gNLRE">
+                    <value name="TEXT">
+                      <shadow type="text" id="tNs9:Sw--.nEUB1~n_0e">
+                        <field name="TEXT"></field>
+                      </shadow>
+                      <block type="last_digit" id="KFJ5uugec+ik2FR8GBqx"></block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <next>
+              <block type="notify" id="w/MPhMFmIhDo3KAsH-?`">
+                <field name="NOTIFICATION_TYPE">info</field>
+                <field name="NOTIFICATION_SOUND">silent</field>
+                <value name="MESSAGE">
+                  <shadow type="text" id="pK9T4G#M5CZk-`^L[;7]">
+                    <field name="TEXT">abc</field>
+                  </shadow>
+                  <block type="variables_get" id="#_%Hl!{C2EODb$NN3Xj`">
+                    <field name="VAR" id="vSo{.QQ|Lt$6rG`2){;f">text8</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <value name="IF1">
+          <block type="check_direction" id="8*RR*lk#=)U;P:](=9$Y">
+            <field name="CHECK_DIRECTION">fall</field>
+          </block>
+        </value>
+        <statement name="DO1">
+          <block type="text_join" id="FHi#=)L//ILF;|r/~c+@">
+            <field name="VARIABLE" id="ir^JKn4_@f39KJ]9w)]+">text9</field>
+            <statement name="STACK">
+              <block type="text_statement" id="h@I!?#MQBD54+r$xqNUy">
+                <value name="TEXT">
+                  <shadow type="text" id="vyr0g);.tGgWx=tT~2z9">
+                    <field name="TEXT"></field>
+                  </shadow>
+                  <block type="text" id="+nrjOi6vXJLOlDWK/kgZ">
+                    <field name="TEXT">Last digit is: </field>
+                  </block>
+                </value>
+                <next>
+                  <block type="text_statement" id="X9tX%cpyW+aJ0=.6%Czf">
+                    <value name="TEXT">
+                      <shadow type="text" id="VrFr^NJ]Md/}b5:(C^6Q">
+                        <field name="TEXT"></field>
+                      </shadow>
+                      <block type="last_digit" id="$.fC{b`#~B]q#aA`CP8_"></block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <next>
+              <block type="notify" id="{`|FxCBgu.7qY3=W7)%-">
+                <field name="NOTIFICATION_TYPE">error</field>
+                <field name="NOTIFICATION_SOUND">silent</field>
+                <value name="MESSAGE">
+                  <shadow type="text" id="33G(@{%EPwPz1#gwseN{">
+                    <field name="TEXT">abc</field>
+                  </shadow>
+                  <block type="variables_get" id="52Awud1k{C{tq]J3}rTe">
+                    <field name="VAR" id="ir^JKn4_@f39KJ]9w)]+">text9</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+  <block type="tick_analysis" id="IGm(,BQRs*0lDupp=i*_" x="0" y="4636">
+    <statement name="TICKANALYSIS_STACK">
+      <block type="controls_if" id="MX[r`l6v!]oYFf1+%zci">
+        <mutation xmlns="http://www.w3.org/1999/xhtml" elseif="1"></mutation>
+        <value name="IF0">
+          <block type="check_direction" id="D8}.NiL}xL[Xz^s1Lu*Y">
+            <field name="CHECK_DIRECTION">rise</field>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="text_join" id="9k,R-r*V?8NVt-[98?et">
+            <field name="VARIABLE" id="n@LooLxt_X@$@BetZJq*">text10</field>
+            <statement name="STACK">
+              <block type="text_statement" id="@;ND,sKv5IG(I*m~K`]z">
+                <value name="TEXT">
+                  <shadow type="text" id="I/!;ZpZPnZ.kV_kC[wa4">
+                    <field name="TEXT"></field>
+                  </shadow>
+                  <block type="text" id="BT:rfg)l$LzU_;,STpVH">
+                    <field name="TEXT">Last digit is: </field>
+                  </block>
+                </value>
+                <next>
+                  <block type="text_statement" id="Xb26m*)Nd)y5Higi=BE+">
+                    <value name="TEXT">
+                      <shadow type="text" id="w:bgm^8kR;^V.,2pv$!j">
+                        <field name="TEXT"></field>
+                      </shadow>
+                      <block type="last_digit" id="L4klseLGj!!}n4U+YdJd"></block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <next>
+              <block type="notify" id="0LjO9Y]fV6.s}z?MpIhZ">
+                <field name="NOTIFICATION_TYPE">info</field>
+                <field name="NOTIFICATION_SOUND">silent</field>
+                <value name="MESSAGE">
+                  <shadow type="text" id="wQ+maswk=]6U4BZgc,_i">
+                    <field name="TEXT">abc</field>
+                  </shadow>
+                  <block type="variables_get" id="cmrLZ?z0)Ae0G`aQ~?D?">
+                    <field name="VAR" id="n@LooLxt_X@$@BetZJq*">text10</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <value name="IF1">
+          <block type="check_direction" id="twF+6e9OK9wa7`UmYpVI">
+            <field name="CHECK_DIRECTION">fall</field>
+          </block>
+        </value>
+        <statement name="DO1">
+          <block type="text_join" id="COz%OHu]RJanA@|=sq*;">
+            <field name="VARIABLE" id="d0UR^iVdSa4P=SDZK,Po">text11</field>
+            <statement name="STACK">
+              <block type="text_statement" id="q![uMX*SC[6nda[$-^,7">
+                <value name="TEXT">
+                  <shadow type="text" id="5gm$E|*N/O0wwN[:l6sq">
+                    <field name="TEXT"></field>
+                  </shadow>
+                  <block type="text" id="Lu]XuW1z0=p/]p_5~o#]">
+                    <field name="TEXT">Last digit is: </field>
+                  </block>
+                </value>
+                <next>
+                  <block type="text_statement" id="5^~T#^m-jF{|@_dWrdT+">
+                    <value name="TEXT">
+                      <shadow type="text" id="k91N,~?M8WFSMEbSLlxv">
+                        <field name="TEXT"></field>
+                      </shadow>
+                      <block type="last_digit" id="=fJ)B$O=c8SyoRUIrgpi"></block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <next>
+              <block type="notify" id="w=.=.],h}[!GD5%?D]z3">
+                <field name="NOTIFICATION_TYPE">error</field>
+                <field name="NOTIFICATION_SOUND">silent</field>
+                <value name="MESSAGE">
+                  <shadow type="text" id="5;gFTBsGhA9DFK1E@-f6">
+                    <field name="TEXT">abc</field>
+                  </shadow>
+                  <block type="variables_get" id="6Lo_Ucq8?W}-WDE}6wa5">
+                    <field name="VAR" id="d0UR^iVdSa4P=SDZK,Po">text11</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+  <block type="tick_analysis" id="gPC0f2w3Cy,|GWd)l;2!" x="0" y="5348">
+    <statement name="TICKANALYSIS_STACK">
+      <block type="controls_if" id="i1CY-Wx^h6hF?.E;#}Sr">
+        <mutation xmlns="http://www.w3.org/1999/xhtml" elseif="1"></mutation>
+        <value name="IF0">
+          <block type="check_direction" id="aCRCF[_5m5YmFUsFH=%7">
+            <field name="CHECK_DIRECTION">rise</field>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="text_join" id="KM`|4#!Yz~..,u7^Kjrh">
+            <field name="VARIABLE" id="BV,=e+(b_D:!mMn7)+9+">text12</field>
+            <statement name="STACK">
+              <block type="text_statement" id="}%H;O;NHdlLnKV*kkh02">
+                <value name="TEXT">
+                  <shadow type="text" id="wxDv6f?gE#h.Y|ySX_[u">
+                    <field name="TEXT"></field>
+                  </shadow>
+                  <block type="text" id="f79EOWG{xVDYn(PhZ0c(">
+                    <field name="TEXT">Last digit is: </field>
+                  </block>
+                </value>
+                <next>
+                  <block type="text_statement" id="yW/f$2)d`%$9IIp4{^E(">
+                    <value name="TEXT">
+                      <shadow type="text" id="jX_P1A+|X(cyS4gr5l93">
+                        <field name="TEXT"></field>
+                      </shadow>
+                      <block type="last_digit" id="M6D{2fvQchj.Gsx{p7B!"></block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <next>
+              <block type="notify" id=".P5LQP5S!TqUrgzlzrUS">
+                <field name="NOTIFICATION_TYPE">info</field>
+                <field name="NOTIFICATION_SOUND">silent</field>
+                <value name="MESSAGE">
+                  <shadow type="text" id="Q=4l@t3yb#aQG1RjK!T9">
+                    <field name="TEXT">abc</field>
+                  </shadow>
+                  <block type="variables_get" id="*^D[U4^Lpm8I^DuuS64A">
+                    <field name="VAR" id="BV,=e+(b_D:!mMn7)+9+">text12</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <value name="IF1">
+          <block type="check_direction" id="4vD}Vrlaa055QZ]A-|@.">
+            <field name="CHECK_DIRECTION">fall</field>
+          </block>
+        </value>
+        <statement name="DO1">
+          <block type="text_join" id="w#8CF-%33U3qJt`gRX3H">
+            <field name="VARIABLE" id="YBjQ-IL-Udhv)g0`M2P}">text13</field>
+            <statement name="STACK">
+              <block type="text_statement" id="NA4f~}}I!.~3];.L3$dB">
+                <value name="TEXT">
+                  <shadow type="text" id="eE,]rt--=Mg2ai^Ok9R7">
+                    <field name="TEXT"></field>
+                  </shadow>
+                  <block type="text" id="~hdVw9kwU%C4jgRA)Qxx">
+                    <field name="TEXT">Last digit is: </field>
+                  </block>
+                </value>
+                <next>
+                  <block type="text_statement" id="re}2f!ZM1obN|nhd)O~f">
+                    <value name="TEXT">
+                      <shadow type="text" id="F%15{lj3N?%g.)VJaA~A">
+                        <field name="TEXT"></field>
+                      </shadow>
+                      <block type="last_digit" id="T-eX!b3^2sL7KGK+DKO?"></block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <next>
+              <block type="notify" id="W0/|U9fC,rm+m1rK_]yz">
+                <field name="NOTIFICATION_TYPE">error</field>
+                <field name="NOTIFICATION_SOUND">silent</field>
+                <value name="MESSAGE">
+                  <shadow type="text" id="r]kjblGDyek-Bq4mppTk">
+                    <field name="TEXT">abc</field>
+                  </shadow>
+                  <block type="variables_get" id="?I.)MX1_9j71H2|rge?:">
+                    <field name="VAR" id="YBjQ-IL-Udhv)g0`M2P}">text13</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+  <block type="tick_analysis" id="s?-f:.YO=%TrCbpGky2J" x="0" y="6060">
+    <statement name="TICKANALYSIS_STACK">
+      <block type="controls_if" id="nV@-Y4Gex9$=XFfxiHDY">
+        <mutation xmlns="http://www.w3.org/1999/xhtml" elseif="1"></mutation>
+        <value name="IF0">
+          <block type="check_direction" id="S(rBj;lp^!,n:TjWNL[E">
+            <field name="CHECK_DIRECTION">rise</field>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="text_join" id="/4%G9A4={b42eSpO2c4[">
+            <field name="VARIABLE" id="mJ5|XC#lqsrd}5PP=-Ys">text14</field>
+            <statement name="STACK">
+              <block type="text_statement" id="JhbtAV}7PmMGh|`#7SCT">
+                <value name="TEXT">
+                  <shadow type="text" id="[lU)w0$(5,7k?r#,LgUi">
+                    <field name="TEXT"></field>
+                  </shadow>
+                  <block type="text" id="j].aIwy[Q4$D36@9!?ec">
+                    <field name="TEXT">Last digit is: </field>
+                  </block>
+                </value>
+                <next>
+                  <block type="text_statement" id="Il,vPq~#;$e1hH]kUH$B">
+                    <value name="TEXT">
+                      <shadow type="text" id="$!FhuzTckm::-x#hY$7x">
+                        <field name="TEXT"></field>
+                      </shadow>
+                      <block type="last_digit" id="iFuf$_2e$Y-+Zg:=VMQa"></block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <next>
+              <block type="notify" id="R1@,pq@1O-vE~3bmzQ%e">
+                <field name="NOTIFICATION_TYPE">info</field>
+                <field name="NOTIFICATION_SOUND">silent</field>
+                <value name="MESSAGE">
+                  <shadow type="text" id="ko{F0MkXdMtkr`$zl#-T">
+                    <field name="TEXT">abc</field>
+                  </shadow>
+                  <block type="variables_get" id="=!mFO$enmuL$|ve+T~QS">
+                    <field name="VAR" id="mJ5|XC#lqsrd}5PP=-Ys">text14</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <value name="IF1">
+          <block type="check_direction" id="8L+*lRG`E;B`i+v(Q;tH">
+            <field name="CHECK_DIRECTION">fall</field>
+          </block>
+        </value>
+        <statement name="DO1">
+          <block type="text_join" id="pa{GIlW20Fklh`{_pOOv">
+            <field name="VARIABLE" id="?QewE)[fvxc/Y]2qFxo~">text15</field>
+            <statement name="STACK">
+              <block type="text_statement" id="~,#*Y:%;f/AO9IC^bCy$">
+                <value name="TEXT">
+                  <shadow type="text" id="gMx~WtIiH}.j!yb#qbgT">
+                    <field name="TEXT"></field>
+                  </shadow>
+                  <block type="text" id="Z44(ZcpTrYkY8!vto;*m">
+                    <field name="TEXT">Last digit is: </field>
+                  </block>
+                </value>
+                <next>
+                  <block type="text_statement" id="{|eMTVPH,@hE,^=B(DDO">
+                    <value name="TEXT">
+                      <shadow type="text" id="Uys5TwY5lay*|PoejWID">
+                        <field name="TEXT"></field>
+                      </shadow>
+                      <block type="last_digit" id="dhuN6Cm%Iq.ucR6-tW~+"></block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <next>
+              <block type="notify" id="QsHWB)+^}]GfGiYjX6vr">
+                <field name="NOTIFICATION_TYPE">error</field>
+                <field name="NOTIFICATION_SOUND">silent</field>
+                <value name="MESSAGE">
+                  <shadow type="text" id="wgEu%|*uxn?VuG!{9^U6">
+                    <field name="TEXT">abc</field>
+                  </shadow>
+                  <block type="variables_get" id="]B:{^6Lwt-osje.*`/kb">
+                    <field name="VAR" id="?QewE)[fvxc/Y]2qFxo~">text15</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+</xml>

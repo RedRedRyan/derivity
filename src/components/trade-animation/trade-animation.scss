@@ -1,0 +1,449 @@
+@use 'components/shared/styles/constants' as *;
+@use 'components/shared/styles/devices' as *;
+
+@keyframes animate-progress {
+    0% {
+        width: 0%;
+    }
+
+    100% {
+        width: 51%;
+    }
+}
+
+@keyframes animate-progress-complete {
+    0% {
+        width: 50%;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+
+@keyframes animate-circle {
+    0% {
+        transform: scale(0);
+    }
+
+    50% {
+        transform: scale(1.5);
+    }
+
+    100% {
+        transform: scale(0);
+    }
+}
+
+@keyframes animate-circle-appear {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes animate-circle-pop {
+    0% {
+        transform: scale(0);
+    }
+
+    50% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(0);
+    }
+}
+
+.animation {
+    $static-circle-diameter: 2px;
+    $dynamic-circle-diameter: 10px;
+    $animation: &;
+
+    &__wrapper {
+        display: flex;
+        align-items: center;
+        min-height: 3.6rem;
+        width: min(100%, 33.6rem);
+        max-width: 100%;
+    }
+
+    &__controls {
+        display: flex;
+        flex: 0 0 auto;
+        align-items: stretch;
+        gap: 0.2rem;
+        min-height: 3.6rem;
+    }
+
+    &__overlay {
+        border-top-left-radius: 0;
+        border-bottom-right-radius: $BORDER_RADIUS;
+    }
+
+    &__run-button {
+        flex: 0 0 auto;
+        min-width: 7.2rem;
+        height: 3.6rem !important;
+        border-start-end-radius: 0 !important;
+        border-end-end-radius: 0 !important;
+        background-color: var(--rm-shell-run);
+        border: 0;
+
+        &:hover {
+            background-color: var(--rm-shell-run-hover) !important;
+        }
+    }
+
+    &__stop-button,
+    &__pause-button,
+    &__resume-button {
+        flex: 0 0 auto;
+        min-width: 6.4rem;
+        height: 3.6rem !important;
+        border-start-end-radius: 0 !important;
+        border-end-end-radius: 0 !important;
+        padding-inline: 0.8rem !important;
+    }
+
+    &__stop-button {
+        background-color: var(--button-primary-default);
+
+        &:hover {
+            background-color: var(--button-primary-default) !important;
+        }
+    }
+
+    &__pause-button,
+    &__resume-button {
+        background-color: var(--general-section-2);
+        color: var(--text-prominent) !important;
+        border: 1px solid var(--border-normal);
+
+        span,
+        .dc-text {
+            color: var(--text-prominent) !important;
+        }
+    }
+
+    &__container {
+        min-height: 100%;
+        flex: 1 1 auto;
+        min-width: 0;
+        padding: 0.5rem 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        border-start-end-radius: $BORDER_RADIUS;
+        border-end-end-radius: $BORDER_RADIUS;
+        background-color: var(--rm-shell-run-panel);
+        border: solid 1px var(--rm-shell-run-panel);
+        position: relative;
+        overflow: hidden;
+
+        &--with-execution {
+            justify-content: flex-start;
+        }
+    }
+
+    .theme--light &__container {
+        background-color: var(--rm-shell-run-panel-light);
+        border-color: var(--rm-shell-border);
+        color: var(--rm-shell-text);
+    }
+
+    &__execution-mode {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.8rem;
+        align-items: center;
+        margin-bottom: 0.3rem;
+        min-width: 0;
+    }
+
+    &__execution-mode-copy {
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__execution-mode-label {
+        color: var(--text-less-prominent);
+        font-size: 1rem;
+        font-weight: 700;
+        line-height: 1.1;
+        text-transform: none;
+    }
+
+    &__execution-mode-value {
+        color: var(--text-prominent);
+        font-size: 1.4rem;
+        font-weight: 800;
+        letter-spacing: 0.02em;
+        line-height: 1.1;
+    }
+
+    &__execution-mode-toggle {
+        margin: 0;
+        width: 4.2rem;
+        height: 2.2rem;
+        padding-left: 0.2rem;
+        background: var(--general-disabled);
+        border: 1px solid var(--border-normal);
+    }
+
+    &__execution-mode-toggle-button {
+        width: 1.6rem;
+        height: 1.6rem;
+        background: var(--gradient-gold);
+    }
+
+    .dc-toggle-switch:checked + &__execution-mode-toggle {
+        background: rgb(75 180 179 / 22%);
+    }
+
+    .dc-toggle-switch:checked + &__execution-mode-toggle &__execution-mode-toggle-button {
+        background: var(--status-success);
+    }
+
+    &__text {
+        color: var(--rm-shell-muted);
+        font-size: 12px;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 0.5rem;
+        line-height: 18px;
+
+        &--with-execution {
+            text-align: start;
+            margin-bottom: 0.4rem;
+        }
+    }
+
+    &__progress {
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        height: 6px;
+
+        .circular-wrapper {
+            width: $static-circle-diameter;
+            height: $static-circle-diameter;
+            align-self: center;
+            display: flex;
+
+            .static-circle {
+                width: $static-circle-diameter;
+                height: $static-circle-diameter;
+                background-color: var(--rm-shell-progress-dot);
+                border-radius: 100%;
+                align-self: center;
+                z-index: 1;
+            }
+
+            .dynamic-circle {
+                border-radius: 100%;
+                height: $dynamic-circle-diameter;
+                width: $dynamic-circle-diameter;
+                margin-left: -4px;
+                margin-top: -4px;
+                opacity: 0.32;
+                position: absolute;
+            }
+
+            &:nth-child(2) {
+                margin-left: 3px;
+            }
+
+            &:last-child {
+                margin-right: 3px;
+            }
+        }
+
+        &-line {
+            background-color: var(--rm-shell-progress-track);
+            height: 100%;
+            width: 100%;
+            border-radius: $BORDER_RADIUS;
+            position: absolute;
+        }
+
+        &-bar {
+            background-color: var(--rm-shell-gold);
+            border-radius: $BORDER_RADIUS;
+            width: 0;
+            height: 100%;
+        }
+
+        &-4 {
+            animation: animate-progress 0.5s 1;
+            animation-fill-mode: forwards;
+        }
+
+        &-5 {
+            width: 51%;
+            border-radius: 5px 0 0 5px;
+        }
+
+        &-6 {
+            animation: animate-progress-complete 0.5s 1;
+            animation-fill-mode: forwards;
+        }
+
+        &-7 {
+            width: 75%;
+            border-radius: 5px 0 0 5px;
+        }
+    }
+
+    &--running {
+        #{$animation}__progress {
+            .circular-wrapper {
+                &.completed,
+                &.active {
+                    .static-circle {
+                        background-color: $color-green-2;
+                    }
+                }
+
+                &.active {
+                    .dynamic-circle {
+                        animation: animate-circle 0.8s infinite;
+                        animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+                        background-color: var(--status-success);
+                        background-color: var(--rm-shell-gold);
+
+                        // transform: translate(-50%, -50%);
+                        // z-index: 1;
+                    }
+                }
+
+                .static-circle {
+                    animation: animate-circle-appear 1s;
+                    background-color: $COLOR_CORAL_RED;
+                }
+
+                .dynamic-circle {
+                    animation: animate-circle 1s;
+                    background-color: $COLOR_CORAL_RED;
+                    transform: scale(0);
+                }
+            }
+        }
+    }
+
+    &--paused {
+        #{$animation}__text {
+            color: var(--status-warning);
+        }
+    }
+}
+
+.theme--light {
+    .animation {
+        &__run-button,
+        &__stop-button,
+        &__pause-button,
+        &__resume-button {
+            color: #ffffff !important;
+
+            span,
+            .dc-text {
+                color: #ffffff !important;
+            }
+        }
+
+        &__container {
+            background-color: #ffffff;
+            border-color: #cbd5e1;
+            color: #111827;
+        }
+
+        &__execution-mode-label {
+            color: #475569;
+        }
+
+        &__execution-mode-value,
+        &__text {
+            color: #111827;
+        }
+
+        &__progress-line {
+            background-color: #d1d5db;
+        }
+
+        &__progress {
+            .circular-wrapper .static-circle {
+                background-color: #374151;
+            }
+        }
+
+        &__execution-mode-toggle {
+            background: #dbeafe;
+            border-color: #cbd5e1;
+        }
+    }
+}
+
+@media (width <= 1200px) {
+    .animation {
+        &__wrapper {
+            width: min(100%, 29.6rem);
+        }
+
+        &__run-button,
+        &__stop-button {
+            min-width: 9.6rem;
+        }
+    }
+}
+
+@media (width <= 768px) {
+    .animation {
+        &__wrapper {
+            width: 100%;
+        }
+
+        &__run-button,
+        &__stop-button,
+        &__pause-button,
+        &__resume-button {
+            min-width: 6rem;
+            padding-inline: 0.6rem !important;
+        }
+
+        &__container {
+            padding-inline: 0.8rem;
+        }
+
+        &__execution-mode-value {
+            font-size: 1.3rem;
+        }
+
+        &__execution-mode-toggle {
+            width: 3.8rem;
+            height: 2rem;
+        }
+
+        &__execution-mode-toggle-button {
+            width: 1.4rem;
+            height: 1.4rem;
+        }
+
+        &__text {
+            font-size: 1.1rem;
+            line-height: 1.4;
+        }
+    }
+}
+
+.dc-modal__container_animation__modal {
+    @include mobile-or-tablet-screen {
+        width: 31.2rem !important;
+    }
+}

@@ -1,0 +1,95 @@
+.sc-toolbar-widget {
+    button.settings-toolbar-button {
+        background: transparent;
+        border: none;
+        padding: 0;
+        margin: 0 4px;
+        cursor: pointer;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: inherit;
+
+        &:hover {
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 4px;
+        }
+
+        &:active {
+            background: rgba(0, 0, 0, 0.1);
+        }
+    }
+}
+
+.dashboard__live-price-marker {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: visible;
+    pointer-events: none;
+    z-index: 7;
+
+    &__dot {
+        position: absolute;
+        left: -0.45rem;
+        top: -0.45rem;
+        width: 0.9rem;
+        height: 0.9rem;
+        border-radius: 50%;
+        background: #38bdf8;
+        box-shadow:
+            0 0 0 0.3rem rgb(56 189 248 / 0.22),
+            0 0 1.1rem rgb(56 189 248 / 0.26);
+    }
+
+    &__line {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: var(--live-price-line-width, 100vw);
+        border-top: 1px solid rgb(56 189 248 / 0.76);
+        box-shadow: 0 0 0.8rem rgb(56 189 248 / 0.18);
+    }
+
+    &__value {
+        position: absolute;
+        left: var(--live-price-line-width, 100vw);
+        top: 0;
+        transform: translate(calc(-100% - 0.4rem), -50%);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 7.4rem;
+        padding: 0.35rem 0.8rem;
+        border-radius: 999px;
+        background: rgb(7 89 133 / 0.97);
+        color: #fff;
+        font-size: 1.1rem;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+        box-shadow: 0 0.4rem 1.4rem rgb(0 0 0 / 0.22);
+        border: 1px solid rgb(125 211 252 / 0.45);
+        white-space: nowrap;
+    }
+}
+
+.theme--light {
+    .dashboard__live-price-marker {
+        &__dot {
+            background: #0891b2;
+            box-shadow:
+                0 0 0 0.3rem rgb(8 145 178 / 0.16),
+                0 0 1rem rgb(8 145 178 / 0.16);
+        }
+
+        &__line {
+            border-top-color: rgb(14 116 144 / 0.54);
+        }
+
+        &__value {
+            background: rgb(8 145 178 / 0.96);
+        }
+    }
+}

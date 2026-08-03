@@ -1,0 +1,23 @@
+[build]
+  # Install from the public npm registry during Netlify builds.
+  command = "npm install && npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+  NPM_CONFIG_REGISTRY = "https://registry.npmjs.org/"
+
+# Proxy all /api/* requests to the Replit backend.
+# The Replit dev server (port 5000) internally proxies /api → port 8000 (Express).
+# Update this URL to your deployed Replit autoscale URL after publishing.
+[[redirects]]
+  from = "/api/*"
+  to = "https://439a6b4c-93b6-40a3-9d2a-406052ed76f2-00-34dshrqu4dsru.janeway.replit.dev/api/:splat"
+  status = 200
+  force = true
+
+# SPA fallback — must come AFTER the /api proxy rule
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
