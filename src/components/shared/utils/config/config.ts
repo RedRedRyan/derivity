@@ -301,11 +301,11 @@ export const DOMAIN_CONFIG: Record<string, DomainConfig> = {
     // ── Primary production domain ────────────────────────────────────────────
     // New OAuth app registered redirect: https://riskmanagers.site/ (trailing slash)
     ...createHostedDomainEntries({
-        primaryDomain: 'riskmanagers.site',
-        aliases: ['www.riskmanagers.site'],
+        primaryDomain: 'cyctrades.vercel.app',
+        aliases: ['www.cyctrades.vercel.app'],
         clientId: process.env.CLIENT_ID || '33cCr2bWsByPgLlormNFw',
         appId: process.env.APP_ID || '71937',
-        redirectUri: process.env.REDIRECT_URI || 'https://riskmanagers.site/',
+        redirectUri: process.env.REDIRECT_URI || 'https://cyctrades.vercel.app/',
         includeLegacyAppIdInOAuth: true,
         features: {
             autoTrades: true,
