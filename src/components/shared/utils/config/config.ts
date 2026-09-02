@@ -303,7 +303,7 @@ export const DOMAIN_CONFIG: Record<string, DomainConfig> = {
     ...createHostedDomainEntries({
         primaryDomain: 'cyctrades.vercel.app',
         aliases: ['www.cyctrades.vercel.app'],
-        clientId: process.env.CLIENT_ID || '33PPqCmoCqt9yWsbBuSPu',
+        clientId: process.env.CLIENT_ID || '34hTPcfEgmIoIrIZV6Ayb',
         appId: process.env.APP_ID || '',
         redirectUri: process.env.REDIRECT_URI || 'https://cyctrades.vercel.app/',
         includeLegacyAppIdInOAuth: false,
@@ -325,7 +325,7 @@ export const DOMAIN_CONFIG: Record<string, DomainConfig> = {
     ...createHostedDomainEntries({
         primaryDomain: 'cyctrades.vercel.app',
         aliases: ['www.cyctrades.vercel.app'],
-        clientId: '33PPqCmoCqt9yWsbBuSPu',
+        clientId: '34hTPcfEgmIoIrIZV6Ayb',
         appId: '',
         redirectUri: 'https://cyctrades.vercel.app/',
         botsFolder: 'optimumtraders.site',
