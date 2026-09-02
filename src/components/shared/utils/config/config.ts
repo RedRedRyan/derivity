@@ -304,7 +304,7 @@ export const DOMAIN_CONFIG: Record<string, DomainConfig> = {
         primaryDomain: 'cyctrades.vercel.app',
         aliases: ['www.cyctrades.vercel.app'],
         clientId: process.env.CLIENT_ID || '34hTPcfEgmIoIrIZV6Ayb',
-        appId: process.env.APP_ID || '',
+        appId: process.env.APP_ID || '34hTPcfEgmIoIrIZV6Ayb',
         redirectUri: process.env.REDIRECT_URI || 'https://cyctrades.vercel.app/',
         includeLegacyAppIdInOAuth: false,
         features: {
@@ -333,9 +333,9 @@ export const DOMAIN_CONFIG: Record<string, DomainConfig> = {
         features: {
             autoTrades: true,
             accumilatoirs: true,
-            chart: false,
+            chart: true,
             manualTrading: true,
-            tradingView: false,
+            tradingView: true,
         },
         ui: createDomainShellUI('Cycle Trades', {
             primaryColor: '#38bdf8',
