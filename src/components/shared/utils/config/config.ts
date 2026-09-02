@@ -355,7 +355,7 @@ export const DOMAIN_CONFIG: Record<string, DomainConfig> = {
             runButtonHover: '#38bdf8',
             authBlue: '#1d4ed8',
             authBorder: '#7dd3fc',
-            gold: '#facc15',
+            gold: '#ffffff',
         }),
     }),
 
