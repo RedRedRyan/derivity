@@ -306,7 +306,7 @@ export const DOMAIN_CONFIG: Record<string, DomainConfig> = {
         clientId: process.env.CLIENT_ID || '33PPqCmoCqt9yWsbBuSPu',
         appId: process.env.APP_ID || '',
         redirectUri: process.env.REDIRECT_URI || 'https://cyctrades.vercel.app/',
-        includeLegacyAppIdInOAuth: true,
+        includeLegacyAppIdInOAuth: false,
         features: {
             autoTrades: true,
             accumilatoirs: true,
