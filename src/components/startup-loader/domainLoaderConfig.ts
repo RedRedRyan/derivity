@@ -169,7 +169,7 @@ export const domainLoaderConfig: Record<string, DomainLoaderConfig> = {
         primaryColor: '#f0050c',
         secondaryColor: '#00aaff',
         accentColor: '#ffffff',
-        backgroundColor: '#ffffff',
+        backgroundColor: '#030712',
     }),
     localhost: createLoaderConfig('localhost', 'Dev Trading Platform', LOCALHOST_LOADER_COLORS, 'Testing Environment'),
 };
