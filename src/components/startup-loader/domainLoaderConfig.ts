@@ -168,7 +168,7 @@ export const domainLoaderConfig: Record<string, DomainLoaderConfig> = {
     'cyctrades.vercel.app': createLoaderConfig('cyctrades.vercel.app', 'Cycle Trades', {
         primaryColor: '#f0050c',
         secondaryColor: '#00aaff',
-        accentColor: '#000000',
+        accentColor: '#ffffff',
         backgroundColor: '#030712',
     }),
     localhost: createLoaderConfig('localhost', 'Dev Trading Platform', LOCALHOST_LOADER_COLORS, 'Testing Environment'),
