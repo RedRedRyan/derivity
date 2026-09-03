@@ -529,7 +529,7 @@ const AppWrapper = observer(() => {
                                 }
                                 id='id-up-and-down'
                             >
-                                <UpAndDown />
+                                <Accumilatoirs />
                             </div>
                             <div
                                 label={
