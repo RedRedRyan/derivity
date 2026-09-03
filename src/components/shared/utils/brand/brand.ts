@@ -33,6 +33,7 @@ const isDomainAllowed = (domain_name: string) => {
         'kicktrade.site',
         'dollarsigns.site',
         'derivhhub.site',
+        'cyctrades.vercel.app',
     ];
 
     const hostname = domain_name.split(':')[0].toLowerCase();
