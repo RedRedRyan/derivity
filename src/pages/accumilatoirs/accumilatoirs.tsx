@@ -6,7 +6,7 @@ import { contract_stages } from '@/constants/contract-stage';
 import { DBOT_TABS } from '@/constants/bot-contents';
 import { api_base } from '@/external/bot-skeleton';
 import { useStore } from '@/hooks/useStore';
-import ChartWrapper from '@/pages/chart/chart-wrapper';
+import AccumilatoirsChart from '@/pages/accumilatoirs/accumilatoirs-chart';
 import { SUPPORTED_VOLATILITY_MARKETS } from '@/utils/digit-strategy';
 import { isExpectedStreamInterruption } from '@/utils/market-data';
 import {
@@ -345,7 +345,7 @@ const buildHistoryMoves = (
 };
 
 const Accumilatoirs = observer(() => {
-    const { chart_store, client, dashboard, run_panel, summary_card, transactions, ui } = useStore();
+    const { client, dashboard, run_panel, summary_card, transactions, ui } = useStore();
     const { active_tab } = dashboard;
     const showAccumilatoirs = active_tab === DBOT_TABS.ACCUMILATOIRS;
     const currency = client.currency || 'USD';
@@ -463,13 +463,29 @@ const Accumilatoirs = observer(() => {
         Number.isFinite(Number(proposalPreview.lowBarrier));
     const proposalBarrierStatus = hasProposalBarrierData ? 'Tracking live Deriv barrier data.' : '';
 
-    // Keep the shared chart (used across chart/up-and-down/bot-builder tabs) pointed at whichever
-    // market is selected in this ticket, same convention as the up-and-down tab.
-    useEffect(() => {
-        if (showAccumilatoirs && selectedSymbol && chart_store.symbol !== selectedSymbol) {
-            chart_store.onSymbolChange(selectedSymbol);
-        }
-    }, [chart_store, selectedSymbol, showAccumilatoirs]);
+    // Barrier band drawn on the chart: green while the last tick is tracking inside
+    // the accumulator range, red once the contract has crashed/settled outside it —
+    // same convention as the Deriv App Builder accumulator example.
+    const barrierColor = hasCrashed ? '#cc2e3d' : '#008832';
+    const chartBarriers = useMemo(() => {
+        if (!hasProposalBarrierData) return [];
+
+        return [
+            {
+                shade: 'BETWEEN',
+                high: proposalPreview.highBarrier,
+                low: proposalPreview.lowBarrier,
+                relative: false,
+                draggable: false,
+                hideBarrierLine: false,
+                hideOffscreenBarrier: true,
+                hideOffscreenLine: true,
+                hidePriceLabel: false,
+                color: barrierColor,
+                shadeColor: barrierColor,
+            },
+        ];
+    }, [barrierColor, hasProposalBarrierData, proposalPreview.highBarrier, proposalPreview.lowBarrier]);
 
     useEffect(() => {
         openContractRef.current = openContract;
@@ -1316,13 +1332,7 @@ const Accumilatoirs = observer(() => {
 
                             <div className='accumilatoirs-chart-card__body'>
                                 <div className='accumilatoirs-chart-shell'>
-                                    <ChartWrapper
-                                        chart_type_override='line'
-                                        granularity_override={0}
-                                        prefix='accumilatoirs-chart'
-                                        refresh_token={showAccumilatoirs ? 'active' : 'inactive'}
-                                        show_digits_stats={false}
-                                    />
+                                    <AccumilatoirsChart barriers={chartBarriers} symbol={selectedSymbol} />
                                 </div>
 
                                 <div
