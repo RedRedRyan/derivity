@@ -15,7 +15,7 @@
     --acc-muted-fg: #6b7280;
     --acc-border: #e5e7eb;
     --acc-muted-bg: #f4f5f7;
-    --acc-primary: #ff444f;
+    --acc-primary: #00a79e;
     --acc-primary-fg: #ffffff;
     --acc-buy: #00a878;
     --acc-buy-fg: #ffffff;
@@ -43,7 +43,7 @@
     --acc-muted-fg: #9a9ba3;
     --acc-border: rgb(255 255 255 / 0.08);
     --acc-muted-bg: #1a1b1f;
-    --acc-primary: #ff5a64;
+    --acc-primary: #00c2b8;
     --acc-shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px rgb(0 0 0 / 0.35);
 }
 
@@ -437,6 +437,109 @@
 
 .accumilatoirs-inline-input__suffix {
     font-size: 12px;
+    font-weight: 700;
+    color: var(--acc-muted-fg);
+}
+
+// Segmented growth-rate control (1% / 2% / 3% / 4% / 5%), matching Deriv's trader UI.
+.accumilatoirs-segmented {
+    display: flex;
+    border: 1px solid var(--acc-border);
+    border-radius: var(--acc-radius-sm);
+    overflow: hidden;
+    background: var(--acc-bg);
+}
+
+.accumilatoirs-segmented__option {
+    flex: 1;
+    padding: 9px 6px;
+    border: none;
+    border-right: 1px solid var(--acc-border);
+    background: transparent;
+    color: var(--acc-fg);
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+
+    &:last-child {
+        border-right: none;
+    }
+
+    &:hover:not(:disabled):not(&--active) {
+        background: var(--acc-muted-bg);
+    }
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    &--active {
+        background: var(--acc-fg);
+        color: var(--acc-card);
+    }
+}
+
+// Stake stepper (− / value / +), matching Deriv's trader UI.
+.accumilatoirs-stepper {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--acc-border);
+    border-radius: var(--acc-radius-sm);
+    background: var(--acc-bg);
+    overflow: hidden;
+}
+
+.accumilatoirs-stepper__btn {
+    flex: 0 0 auto;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: transparent;
+    color: var(--acc-fg);
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+
+    &:hover:not(:disabled) {
+        background: var(--acc-muted-bg);
+    }
+
+    &:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+}
+
+.accumilatoirs-stepper__value {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    background: transparent;
+    color: var(--acc-fg);
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    padding: 9px 4px;
+
+    &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--acc-primary);
+        outline-offset: -2px;
+    }
+}
+
+.accumilatoirs-stepper__suffix {
+    flex: 0 0 auto;
+    padding-right: 10px;
+    font-size: 11px;
     font-weight: 700;
     color: var(--acc-muted-fg);
 }

@@ -1369,43 +1369,75 @@ const Accumilatoirs = observer(() => {
                             </div>
 
                             <div className='accumilatoirs-ticket-card__section'>
-                                <div className='accumilatoirs-ticket__row'>
-                                    <label className='accumilatoirs-field'>
-                                        <span className='accumilatoirs-field__label'>
-                                            Growth rate
-                                            <span
-                                                className='accumilatoirs-info-dot'
-                                                title='Your stake grows by this percentage for each tick that stays within the barrier range.'
-                                            >
-                                                i
-                                            </span>
-                                        </span>
-                                        <select
-                                            className='accumilatoirs-field__control'
-                                            disabled={hasOpenContract || queuedPurchase}
-                                            value={growthRate}
-                                            onChange={event => setGrowthRate(event.target.value)}
+                                <div className='accumilatoirs-field accumilatoirs-field--growth'>
+                                    <span className='accumilatoirs-field__label'>
+                                        Growth rate
+                                        <span
+                                            className='accumilatoirs-info-dot'
+                                            title='Your stake grows by this percentage for each tick that stays within the barrier range.'
                                         >
-                                            {GROWTH_RATES.map(rate => (
-                                                <option key={rate.value} value={rate.value}>
-                                                    {rate.label}
-                                                </option>
-                                            ))}
-                                        </select>
-                                    </label>
+                                            i
+                                        </span>
+                                    </span>
+                                    <div className='accumilatoirs-segmented' role='radiogroup' aria-label='Growth rate'>
+                                        {GROWTH_RATES.map(rate => (
+                                            <button
+                                                key={rate.value}
+                                                aria-checked={growthRate === rate.value}
+                                                className={classNames('accumilatoirs-segmented__option', {
+                                                    'accumilatoirs-segmented__option--active':
+                                                        growthRate === rate.value,
+                                                })}
+                                                disabled={hasOpenContract || queuedPurchase}
+                                                role='radio'
+                                                type='button'
+                                                onClick={() => setGrowthRate(rate.value)}
+                                            >
+                                                {rate.label}
+                                            </button>
+                                        ))}
+                                    </div>
                                 </div>
 
                                 <label className='accumilatoirs-field'>
                                     <span className='accumilatoirs-field__label'>Stake</span>
-                                    <div className='accumilatoirs-inline-input'>
+                                    <div className='accumilatoirs-stepper'>
+                                        <button
+                                            aria-label='Decrease stake'
+                                            className='accumilatoirs-stepper__btn'
+                                            disabled={hasOpenContract || queuedPurchase}
+                                            type='button'
+                                            onClick={() =>
+                                                setStakeInput(previous => {
+                                                    const next = Math.max(0.01, (Number(previous) || 0) - 1);
+                                                    return String(Math.round(next * 100) / 100);
+                                                })
+                                            }
+                                        >
+                                            −
+                                        </button>
                                         <input
-                                            className='accumilatoirs-field__control'
+                                            className='accumilatoirs-stepper__value'
                                             disabled={hasOpenContract || queuedPurchase}
                                             inputMode='decimal'
                                             value={stakeInput}
                                             onChange={event => setStakeInput(cleanMoneyInput(event.target.value))}
                                         />
-                                        <span className='accumilatoirs-inline-input__suffix'>{currency}</span>
+                                        <span className='accumilatoirs-stepper__suffix'>{currency}</span>
+                                        <button
+                                            aria-label='Increase stake'
+                                            className='accumilatoirs-stepper__btn'
+                                            disabled={hasOpenContract || queuedPurchase}
+                                            type='button'
+                                            onClick={() =>
+                                                setStakeInput(previous => {
+                                                    const next = Math.min(100000, (Number(previous) || 0) + 1);
+                                                    return String(Math.round(next * 100) / 100);
+                                                })
+                                            }
+                                        >
+                                            +
+                                        </button>
                                     </div>
                                 </label>
 

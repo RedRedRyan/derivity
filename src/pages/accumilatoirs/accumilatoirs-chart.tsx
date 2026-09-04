@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import chart_api from '@/external/bot-skeleton/services/api/chart-api';
 import { useSmartChartAdaptor } from '@/hooks/useSmartChartAdaptor';
@@ -57,7 +57,18 @@ const AccumilatoirsChart = observer(({ barriers = [], symbol }: TAccumilatoirsCh
 
     const is_connection_opened = !!chart_api?.api;
 
-    if (!symbol || chartData.activeSymbols.length === 0) {
+    // Defer SmartChart mounting until this component is committed to the DOM.
+    // React 18 concurrent rendering can yield between SmartChart's constructor
+    // (which kicks off the chart engine's async init) and its DOM commit; if a
+    // cached bundle wins that race, the engine initializes against a detached
+    // 0×0 element and paints nothing — a blank chart with no error. Gating the
+    // mount behind a useEffect guarantees it only runs after a real commit.
+    const [isReadyToMount, setIsReadyToMount] = useState(false);
+    useEffect(() => {
+        setIsReadyToMount(true);
+    }, []);
+
+    if (!symbol || chartData.activeSymbols.length === 0 || !isReadyToMount) {
         return (
             <div className='accumilatoirs-chart-shell__loading'>
                 <span className='accumilatoirs-loader' aria-hidden='true' />
