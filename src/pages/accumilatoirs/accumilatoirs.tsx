@@ -6,9 +6,11 @@ import { contract_stages } from '@/constants/contract-stage';
 import { DBOT_TABS } from '@/constants/bot-contents';
 import { api_base } from '@/external/bot-skeleton';
 import { useStore } from '@/hooks/useStore';
-import AccumilatoirsChart from '@/pages/accumilatoirs/accumilatoirs-chart';
+import ChartWrapper from '@/pages/chart/chart-wrapper';
 import { SUPPORTED_VOLATILITY_MARKETS } from '@/utils/digit-strategy';
 import { isExpectedStreamInterruption } from '@/utils/market-data';
+import { formatMoney, formatPercent, formatQuote } from './accumilatoirs-format';
+import TradeControls from './trade-controls';
 import {
     buyContractForUi,
     normalizeTradeParameters,
@@ -76,13 +78,6 @@ const MAX_GRAPH_TICKS = 60;
 const MAX_HISTORY_MOVES = 28;
 
 const cleanMoneyInput = (value: string) => value.replace(/[^\d.]/g, '').replace(/(\..*)\./g, '$1');
-
-const formatMoney = (value: unknown, currency = 'USD') => {
-    const amount = Number(value);
-    if (!Number.isFinite(amount)) return `0.00 ${currency}`;
-
-    return `${amount.toFixed(2)} ${currency}`;
-};
 
 const getTakeProfitAmountFromPercent = (stakeAmount: unknown, takeProfitPercent: unknown) => {
     const stake = Number(stakeAmount);
@@ -242,20 +237,6 @@ const classifyMove = (value: number): THistoryMove['className'] => {
     return 'low';
 };
 
-const formatPercent = (value: unknown) => {
-    const percent = Number(value);
-    if (!Number.isFinite(percent)) return '0.00%';
-
-    return `${percent.toFixed(2)}%`;
-};
-
-const formatQuote = (value: unknown) => {
-    const quote = Number(value);
-    if (!Number.isFinite(quote)) return '-';
-
-    return quote.toFixed(5).replace(/0+$/, '').replace(/\.$/, '');
-};
-
 const getFirstFiniteNumber = (...values: unknown[]) => {
     for (const value of values) {
         const numberValue = Number(value);
@@ -345,7 +326,7 @@ const buildHistoryMoves = (
 };
 
 const Accumilatoirs = observer(() => {
-    const { client, dashboard, run_panel, summary_card, transactions, ui } = useStore();
+    const { chart_store, client, dashboard, run_panel, summary_card, transactions, ui } = useStore();
     const { active_tab } = dashboard;
     const showAccumilatoirs = active_tab === DBOT_TABS.ACCUMILATOIRS;
     const currency = client.currency || 'USD';
@@ -463,29 +444,13 @@ const Accumilatoirs = observer(() => {
         Number.isFinite(Number(proposalPreview.lowBarrier));
     const proposalBarrierStatus = hasProposalBarrierData ? 'Tracking live Deriv barrier data.' : '';
 
-    // Barrier band drawn on the chart: green while the last tick is tracking inside
-    // the accumulator range, red once the contract has crashed/settled outside it —
-    // same convention as the Deriv App Builder accumulator example.
-    const barrierColor = hasCrashed ? '#cc2e3d' : '#008832';
-    const chartBarriers = useMemo(() => {
-        if (!hasProposalBarrierData) return [];
-
-        return [
-            {
-                shade: 'BETWEEN',
-                high: proposalPreview.highBarrier,
-                low: proposalPreview.lowBarrier,
-                relative: false,
-                draggable: false,
-                hideBarrierLine: false,
-                hideOffscreenBarrier: true,
-                hideOffscreenLine: true,
-                hidePriceLabel: false,
-                color: barrierColor,
-                shadeColor: barrierColor,
-            },
-        ];
-    }, [barrierColor, hasProposalBarrierData, proposalPreview.highBarrier, proposalPreview.lowBarrier]);
+    // Keep the shared chart (used across Chart/up-and-down/bot-builder tabs) pointed at
+    // whichever market is selected in this ticket, same convention as the up-and-down tab.
+    useEffect(() => {
+        if (showAccumilatoirs && selectedSymbol && chart_store.symbol !== selectedSymbol) {
+            chart_store.onSymbolChange(selectedSymbol);
+        }
+    }, [chart_store, selectedSymbol, showAccumilatoirs]);
 
     useEffect(() => {
         openContractRef.current = openContract;
@@ -1332,7 +1297,13 @@ const Accumilatoirs = observer(() => {
 
                             <div className='accumilatoirs-chart-card__body'>
                                 <div className='accumilatoirs-chart-shell'>
-                                    <AccumilatoirsChart barriers={chartBarriers} symbol={selectedSymbol} />
+                                    <ChartWrapper
+                                        chart_type_override='line'
+                                        granularity_override={0}
+                                        prefix='accumilatoirs-chart'
+                                        refresh_token={showAccumilatoirs ? 'active' : 'inactive'}
+                                        show_digits_stats={false}
+                                    />
                                 </div>
 
                                 <div
@@ -1360,335 +1331,66 @@ const Accumilatoirs = observer(() => {
                             </div>
                         </section>
 
-                        <aside className='accumilatoirs-ticket-card'>
-                            <div className='accumilatoirs-ticket-card__header'>
-                                <h2>Trade setup</h2>
-                                <span className={classNames({ 'accumilatoirs-live-text': isLive })}>
-                                    {isMarketLoading ? 'Loading' : isLive ? 'LIVE' : 'Waiting'} &middot; {currency}
-                                </span>
-                            </div>
-
-                            <div className='accumilatoirs-ticket-card__section'>
-                                <div className='accumilatoirs-field accumilatoirs-field--growth'>
-                                    <span className='accumilatoirs-field__label'>
-                                        Growth rate
-                                        <span
-                                            className='accumilatoirs-info-dot'
-                                            title='Your stake grows by this percentage for each tick that stays within the barrier range.'
-                                        >
-                                            i
-                                        </span>
-                                    </span>
-                                    <div className='accumilatoirs-segmented' role='radiogroup' aria-label='Growth rate'>
-                                        {GROWTH_RATES.map(rate => (
-                                            <button
-                                                key={rate.value}
-                                                aria-checked={growthRate === rate.value}
-                                                className={classNames('accumilatoirs-segmented__option', {
-                                                    'accumilatoirs-segmented__option--active':
-                                                        growthRate === rate.value,
-                                                })}
-                                                disabled={hasOpenContract || queuedPurchase}
-                                                role='radio'
-                                                type='button'
-                                                onClick={() => setGrowthRate(rate.value)}
-                                            >
-                                                {rate.label}
-                                            </button>
-                                        ))}
-                                    </div>
-                                </div>
-
-                                <label className='accumilatoirs-field'>
-                                    <span className='accumilatoirs-field__label'>Stake</span>
-                                    <div className='accumilatoirs-stepper'>
-                                        <button
-                                            aria-label='Decrease stake'
-                                            className='accumilatoirs-stepper__btn'
-                                            disabled={hasOpenContract || queuedPurchase}
-                                            type='button'
-                                            onClick={() =>
-                                                setStakeInput(previous => {
-                                                    const next = Math.max(0.01, (Number(previous) || 0) - 1);
-                                                    return String(Math.round(next * 100) / 100);
-                                                })
-                                            }
-                                        >
-                                            −
-                                        </button>
-                                        <input
-                                            className='accumilatoirs-stepper__value'
-                                            disabled={hasOpenContract || queuedPurchase}
-                                            inputMode='decimal'
-                                            value={stakeInput}
-                                            onChange={event => setStakeInput(cleanMoneyInput(event.target.value))}
-                                        />
-                                        <span className='accumilatoirs-stepper__suffix'>{currency}</span>
-                                        <button
-                                            aria-label='Increase stake'
-                                            className='accumilatoirs-stepper__btn'
-                                            disabled={hasOpenContract || queuedPurchase}
-                                            type='button'
-                                            onClick={() =>
-                                                setStakeInput(previous => {
-                                                    const next = Math.min(100000, (Number(previous) || 0) + 1);
-                                                    return String(Math.round(next * 100) / 100);
-                                                })
-                                            }
-                                        >
-                                            +
-                                        </button>
-                                    </div>
-                                </label>
-
-                                <label className='accumilatoirs-field'>
-                                    <span className='accumilatoirs-field__label'>
-                                        Take profit
-                                        <span
-                                            className='accumilatoirs-info-dot'
-                                            title='The contract closes automatically when your profit reaches this amount.'
-                                        >
-                                            i
-                                        </span>
-                                    </span>
-                                    <div className='accumilatoirs-inline-input'>
-                                        <input
-                                            className='accumilatoirs-field__control'
-                                            disabled={hasOpenContract || queuedPurchase}
-                                            inputMode='decimal'
-                                            placeholder='-'
-                                            value={autoCashout.takeProfitPercent}
-                                            onChange={event =>
-                                                setAutoCashout(previous => ({
-                                                    ...previous,
-                                                    enabled: true,
-                                                    takeProfitPercent: cleanMoneyInput(event.target.value),
-                                                    useServerTakeProfit: true,
-                                                }))
-                                            }
-                                        />
-                                        <span className='accumilatoirs-inline-input__suffix'>%</span>
-                                    </div>
-                                </label>
-                            </div>
-
-                            {!hasProposalBarrierData && !hasOpenContract && (
-                                <div className='accumilatoirs-summary-panel accumilatoirs-summary-panel--loading'>
-                                    <div className='accumilatoirs-summary-row accumilatoirs-summary-row--skeleton' />
-                                    <div className='accumilatoirs-summary-row accumilatoirs-summary-row--skeleton' />
-                                    <div className='accumilatoirs-summary-row accumilatoirs-summary-row--skeleton' />
-                                </div>
-                            )}
-
-                            {hasProposalBarrierData && !hasOpenContract && (
-                                <div className='accumilatoirs-summary-panel'>
-                                    <div className='accumilatoirs-summary-row'>
-                                        <span>Max. payout</span>
-                                        <span>{formatMoney(proposalPreview.maxPayout, currency)}</span>
-                                    </div>
-                                    <div className='accumilatoirs-summary-row'>
-                                        <span>Spot</span>
-                                        <span>{formatQuote(proposalPreview.spot)}</span>
-                                    </div>
-                                    <div className='accumilatoirs-summary-row'>
-                                        <span>Barrier range</span>
-                                        <span>
-                                            {formatQuote(proposalPreview.lowBarrier)} &ndash;{' '}
-                                            {formatQuote(proposalPreview.highBarrier)}
-                                        </span>
-                                    </div>
-                                    {proposalPreview.minStake ? (
-                                        <div className='accumilatoirs-summary-row'>
-                                            <span>Min. stake</span>
-                                            <span>{formatMoney(proposalPreview.minStake, currency)}</span>
-                                        </div>
-                                    ) : null}
-                                </div>
-                            )}
-
-                            {hasOpenContract && (
-                                <div className='accumilatoirs-summary-panel'>
-                                    <div className='accumilatoirs-summary-row'>
-                                        <span>Stake</span>
-                                        <span>{formatMoney(currentStakeDisplay, currency)}</span>
-                                    </div>
-                                    <div
-                                        className={classNames('accumilatoirs-summary-row', {
-                                            'accumilatoirs-summary-row--positive': currentProfit >= 0,
-                                            'accumilatoirs-summary-row--negative': currentProfit < 0,
-                                        })}
-                                    >
-                                        <span>Current P&amp;L</span>
-                                        <span>
-                                            {currentProfit >= 0 ? '+' : ''}
-                                            {formatMoney(currentProfit, currency)}
-                                        </span>
-                                    </div>
-                                    <div className='accumilatoirs-summary-row accumilatoirs-summary-row--total'>
-                                        <span>Total return</span>
-                                        <span>{formatMoney(bidPrice, currency)}</span>
-                                    </div>
-                                </div>
-                            )}
-
-                            <details className='accumilatoirs-advanced'>
-                                <summary>Advanced strategy</summary>
-
-                                <div className='accumilatoirs-ticket__row accumilatoirs-ticket__row--martingale'>
-                                    <label className='accumilatoirs-field'>
-                                        <span className='accumilatoirs-field__label'>Martingale x</span>
-                                        <input
-                                            className='accumilatoirs-field__control'
-                                            disabled={hasOpenContract || queuedPurchase}
-                                            inputMode='decimal'
-                                            min='1.01'
-                                            step='0.5'
-                                            type='number'
-                                            value={martingale}
-                                            onChange={event => setMartingale(cleanMoneyInput(event.target.value))}
-                                        />
-                                    </label>
-
-                                    <label className='accumilatoirs-field'>
-                                        <span className='accumilatoirs-field__label'>Strategy</span>
-                                        <select
-                                            className='accumilatoirs-field__control'
-                                            disabled={hasOpenContract || queuedPurchase}
-                                            value={martingaleMode}
-                                            onChange={event =>
-                                                setMartingaleMode(normalizeMartingaleMode(event.target.value))
-                                            }
-                                        >
-                                            <option value='no_martingale'>No Martingale</option>
-                                            <option value='after_one_loss'>After 1 loss</option>
-                                            <option value='after_two_losses'>After 2 losses</option>
-                                            <option value='custom_consecutive_loss_trigger'>Custom loss count</option>
-                                        </select>
-                                    </label>
-                                </div>
-
-                                {martingaleMode === 'custom_consecutive_loss_trigger' && (
-                                    <label className='accumilatoirs-field accumilatoirs-field--martingale-threshold'>
-                                        <span className='accumilatoirs-field__label'>
-                                            Consecutive losses before martingale
-                                        </span>
-                                        <input
-                                            className='accumilatoirs-field__control'
-                                            disabled={hasOpenContract || queuedPurchase}
-                                            inputMode='numeric'
-                                            max='10'
-                                            min='1'
-                                            step='1'
-                                            type='number'
-                                            value={consecutiveLossCountInput}
-                                            onBlur={commitConsecutiveLossCountInput}
-                                            onChange={event =>
-                                                handleConsecutiveLossCountInputChange(event.target.value)
-                                            }
-                                        />
-                                    </label>
-                                )}
-
-                                <label
-                                    className={classNames('accumilatoirs-check accumilatoirs-check--auto', {
-                                        'accumilatoirs-check--auto-active': autoTradeEnabled,
-                                    })}
-                                >
-                                    <input
-                                        checked={autoTradeEnabled}
-                                        type='checkbox'
-                                        onChange={event => {
-                                            const enabled = event.target.checked;
-                                            setAutoTradeEnabled(enabled);
-                                            if (enabled && !hasOpenContract) {
-                                                setQueuedPurchase(false);
-                                                queuedPurchaseRef.current = false;
-                                                setMessage('Auto trade enabled. Starting first accumulator now.');
-                                                void executePurchase();
-                                            } else if (!enabled) {
-                                                setQueuedPurchase(false);
-                                                queuedPurchaseRef.current = false;
-                                                setMessage('');
-                                            }
-                                        }}
-                                    />
-                                    <span>Auto trade after breakout</span>
-                                </label>
-                            </details>
-
-                            <div className='accumilatoirs-ticket-card__action'>
-                                {!hasOpenContract && (
-                                    <button
-                                        className={classNames('accumilatoirs-primary', {
-                                            'accumilatoirs-primary--waiting': queuedPurchase,
-                                        })}
-                                        disabled={!canTrade}
-                                        type='button'
-                                        onClick={() => void handleTradeAction()}
-                                    >
-                                        {queuedPurchase
-                                            ? 'Waiting for breakout...'
-                                            : isPurchasing
-                                              ? 'Purchasing...'
-                                              : `Buy at ${growthRatePercent.toFixed(0)}%`}
-                                    </button>
-                                )}
-
-                                {hasOpenContract && (
-                                    <button
-                                        className='accumilatoirs-primary accumilatoirs-primary--cashout'
-                                        disabled={isCashingOut}
-                                        type='button'
-                                        onClick={() => void handleTradeAction()}
-                                    >
-                                        {isCashingOut ? (
-                                            'Cashing out...'
-                                        ) : (
-                                            <span className='accumilatoirs-primary__stacked'>
-                                                <span>Close</span>
-                                                <span className='accumilatoirs-primary__stacked-sub'>
-                                                    {formatMoney(bidPrice, currency)}
-                                                </span>
-                                            </span>
-                                        )}
-                                    </button>
-                                )}
-                            </div>
-
-                            <button
-                                className='accumilatoirs-stop'
-                                disabled={!hasOpenContract && !queuedPurchase && !autoTradeEnabled && !isPurchasing}
-                                type='button'
-                                onClick={() => void handleStopAllTrades()}
-                            >
-                                Stop all trades
-                            </button>
-
-                            <div className='accumilatoirs-ticket__status'>
-                                {hasOpenContract
-                                    ? `Live return ${formatPercent(displayReturnPercent)} (${formatMoney(currentProfit, currency)})`
-                                    : queuedPurchase
-                                      ? hasProposalBarrierData
-                                          ? `${proposalBarrierStatus} Purchase queued for the next breakout/flew away.`
-                                          : 'Purchase queued. Waiting for Deriv barrier data.'
-                                      : proposalPreview.status === 'loading'
-                                        ? 'Preparing Deriv quote...'
-                                        : proposalBarrierStatus || proposalPreview.message}
-                            </div>
-
-                            <div className='accumilatoirs-ticket__meta'>
-                                <span>{selectedMarket?.label}</span>
-                                <span>Current stake {formatMoney(currentStakeDisplay, currency)}</span>
-                                <span>
-                                    TP {autoCashout.takeProfitPercent || 0}% ={' '}
-                                    {formatMoney(currentTakeProfitAmount, currency)}
-                                </span>
-                                <span>Consecutive losses {consecutiveLossDisplay}</span>
-                                {proposalPreview.maxPayout ? (
-                                    <span>Max payout {formatMoney(proposalPreview.maxPayout, currency)}</span>
-                                ) : null}
-                            </div>
-                        </aside>
+                        <TradeControls
+                            autoTradeEnabled={autoTradeEnabled}
+                            bidPrice={bidPrice}
+                            canTrade={canTrade}
+                            consecutiveLossCountInput={consecutiveLossCountInput}
+                            consecutiveLossDisplay={consecutiveLossDisplay}
+                            currency={currency}
+                            currentProfit={currentProfit}
+                            currentStakeDisplay={currentStakeDisplay}
+                            displayReturnPercent={displayReturnPercent}
+                            growthRate={growthRate}
+                            growthRateOptions={GROWTH_RATES}
+                            growthRatePercent={growthRatePercent}
+                            hasOpenContract={hasOpenContract}
+                            hasProposalBarrierData={hasProposalBarrierData}
+                            isCashingOut={isCashingOut}
+                            isLive={isLive}
+                            isMarketLoading={isMarketLoading}
+                            isPurchasing={isPurchasing}
+                            martingale={martingale}
+                            martingaleMode={martingaleMode}
+                            proposal={proposalPreview}
+                            proposalBarrierStatus={proposalBarrierStatus}
+                            proposalMessage={proposalPreview.message}
+                            proposalStatus={proposalPreview.status}
+                            queuedPurchase={queuedPurchase}
+                            selectedMarketLabel={selectedMarket?.label}
+                            stake={stakeInput}
+                            takeProfitAmount={currentTakeProfitAmount}
+                            takeProfitPercent={autoCashout.takeProfitPercent}
+                            onAutoTradeToggle={enabled => {
+                                setAutoTradeEnabled(enabled);
+                                if (enabled && !hasOpenContract) {
+                                    setQueuedPurchase(false);
+                                    queuedPurchaseRef.current = false;
+                                    setMessage('Auto trade enabled. Starting first accumulator now.');
+                                    void executePurchase();
+                                } else if (!enabled) {
+                                    setQueuedPurchase(false);
+                                    queuedPurchaseRef.current = false;
+                                    setMessage('');
+                                }
+                            }}
+                            onCommitConsecutiveLossCountInput={commitConsecutiveLossCountInput}
+                            onConsecutiveLossCountInputChange={handleConsecutiveLossCountInputChange}
+                            onGrowthRateChange={setGrowthRate}
+                            onMartingaleChange={value => setMartingale(cleanMoneyInput(value))}
+                            onMartingaleModeChange={value => setMartingaleMode(normalizeMartingaleMode(value))}
+                            onStakeChange={value => setStakeInput(cleanMoneyInput(value))}
+                            onStopAllTrades={() => void handleStopAllTrades()}
+                            onTakeProfitChange={value =>
+                                setAutoCashout(previous => ({
+                                    ...previous,
+                                    enabled: true,
+                                    takeProfitPercent: cleanMoneyInput(value),
+                                    useServerTakeProfit: true,
+                                }))
+                            }
+                            onTradeAction={() => void handleTradeAction()}
+                        />
                     </div>
                 </div>
             </ThemedScrollbars>
