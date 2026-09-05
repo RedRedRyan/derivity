@@ -33,10 +33,10 @@ export const TRADE_TYPE_CATALOG: TTradeTypeCatalogItem[] = [
     { id: 'even_odd', label: 'Even/Odd', category: 'Digits', glyph: '##', isImplemented: true },
     { id: 'over_under', label: 'Over/Under', category: 'Digits', glyph: '/\\', isImplemented: true },
     { id: 'higher_lower', label: 'Higher/Lower', category: 'Ups & Downs', glyph: '^v', isImplemented: false },
-    { id: 'touch_no_touch', label: 'Touch/No Touch', category: 'Touch & No Touch', glyph: 'x', isImplemented: false },
-    { id: 'multipliers', label: 'Multipliers', category: 'Multipliers', glyph: 'x2', isImplemented: false },
-    { id: 'turbos', label: 'Turbos', category: 'Turbos', glyph: '>>', isImplemented: false },
-    { id: 'vanillas', label: 'Vanillas', category: 'Vanillas', glyph: 'V', isImplemented: false },
+    { id: 'touch_no_touch', label: 'Touch/No Touch', category: 'Touch & No Touch', glyph: 'x', isImplemented: true },
+    { id: 'multipliers', label: 'Multipliers', category: 'Multipliers', glyph: 'x2', isImplemented: true },
+    { id: 'turbos', label: 'Turbos', category: 'Turbos', glyph: '>>', isImplemented: true },
+    { id: 'vanillas', label: 'Vanillas', category: 'Vanillas', glyph: 'V', isImplemented: true },
 ];
 
 export const CATEGORY_ORDER: TTradeTypeCategory[] = [

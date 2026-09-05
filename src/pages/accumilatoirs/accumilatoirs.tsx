@@ -12,7 +12,9 @@ import { isExpectedStreamInterruption } from '@/utils/market-data';
 import { formatMoney, formatPercent, formatQuote } from './accumilatoirs-format';
 import TradeControls from './trade-controls';
 import { getTradeTypeById, TTradeTypeId } from './trade-type-catalog';
+import BarrierDurationTradeControls from './barrier-duration-trade-controls';
 import DigitsTradeControls from './digits-trade-controls';
+import MultipliersTradeControls from './multiplier-trade-controls';
 import TradeTypePreview from './trade-type-preview';
 import TradeTypeSwitcher from './trade-type-switcher';
 import {
@@ -1408,6 +1410,16 @@ const Accumilatoirs = observer(() => {
                                     subType={selectedTradeType}
                                     symbol={selectedSymbol}
                                 />
+                            ) : selectedTradeType === 'touch_no_touch' ||
+                              selectedTradeType === 'turbos' ||
+                              selectedTradeType === 'vanillas' ? (
+                                <BarrierDurationTradeControls
+                                    currency={currency}
+                                    subType={selectedTradeType}
+                                    symbol={selectedSymbol}
+                                />
+                            ) : selectedTradeType === 'multipliers' ? (
+                                <MultipliersTradeControls currency={currency} symbol={selectedSymbol} />
                             ) : (
                                 <TradeTypePreview currency={currency} tradeType={getTradeTypeById(selectedTradeType)} />
                             )}
