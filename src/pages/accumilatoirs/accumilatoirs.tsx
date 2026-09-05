@@ -12,6 +12,7 @@ import { isExpectedStreamInterruption } from '@/utils/market-data';
 import { formatMoney, formatPercent, formatQuote } from './accumilatoirs-format';
 import TradeControls from './trade-controls';
 import { getTradeTypeById, TTradeTypeId } from './trade-type-catalog';
+import DigitsTradeControls from './digits-trade-controls';
 import TradeTypePreview from './trade-type-preview';
 import TradeTypeSwitcher from './trade-type-switcher';
 import {
@@ -1398,6 +1399,14 @@ const Accumilatoirs = observer(() => {
                                         }))
                                     }
                                     onTradeAction={() => void handleTradeAction()}
+                                />
+                            ) : selectedTradeType === 'matches_differs' ||
+                              selectedTradeType === 'even_odd' ||
+                              selectedTradeType === 'over_under' ? (
+                                <DigitsTradeControls
+                                    currency={currency}
+                                    subType={selectedTradeType}
+                                    symbol={selectedSymbol}
                                 />
                             ) : (
                                 <TradeTypePreview currency={currency} tradeType={getTradeTypeById(selectedTradeType)} />

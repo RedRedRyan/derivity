@@ -29,9 +29,9 @@ export interface TTradeTypeCatalogItem {
 
 export const TRADE_TYPE_CATALOG: TTradeTypeCatalogItem[] = [
     { id: 'accumulators', label: 'Accumulators', category: 'Accumulators', glyph: '~', isImplemented: true },
-    { id: 'matches_differs', label: 'Matches/Differs', category: 'Digits', glyph: '::', isImplemented: false },
-    { id: 'even_odd', label: 'Even/Odd', category: 'Digits', glyph: '##', isImplemented: false },
-    { id: 'over_under', label: 'Over/Under', category: 'Digits', glyph: '/\\', isImplemented: false },
+    { id: 'matches_differs', label: 'Matches/Differs', category: 'Digits', glyph: '::', isImplemented: true },
+    { id: 'even_odd', label: 'Even/Odd', category: 'Digits', glyph: '##', isImplemented: true },
+    { id: 'over_under', label: 'Over/Under', category: 'Digits', glyph: '/\\', isImplemented: true },
     { id: 'higher_lower', label: 'Higher/Lower', category: 'Ups & Downs', glyph: '^v', isImplemented: false },
     { id: 'touch_no_touch', label: 'Touch/No Touch', category: 'Touch & No Touch', glyph: 'x', isImplemented: false },
     { id: 'multipliers', label: 'Multipliers', category: 'Multipliers', glyph: 'x2', isImplemented: false },
