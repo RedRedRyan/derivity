@@ -113,7 +113,7 @@ export function TradeControls({
     const isControlsLocked = hasOpenContract || queuedPurchase;
 
     return (
-        <aside className='accumilatoirs-ticket-card'>
+        <>
             <div className='accumilatoirs-ticket-card__header'>
                 <h2>Trade setup</h2>
                 <span className={classNames({ 'accumilatoirs-live-text': isLive })}>
@@ -408,7 +408,7 @@ export function TradeControls({
                 <span>Consecutive losses {consecutiveLossDisplay}</span>
                 {proposal.maxPayout ? <span>Max payout {formatMoney(proposal.maxPayout, currency)}</span> : null}
             </div>
-        </aside>
+        </>
     );
 }
 

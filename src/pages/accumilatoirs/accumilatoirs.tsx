@@ -11,6 +11,9 @@ import { SUPPORTED_VOLATILITY_MARKETS } from '@/utils/digit-strategy';
 import { isExpectedStreamInterruption } from '@/utils/market-data';
 import { formatMoney, formatPercent, formatQuote } from './accumilatoirs-format';
 import TradeControls from './trade-controls';
+import { getTradeTypeById, TTradeTypeId } from './trade-type-catalog';
+import TradeTypePreview from './trade-type-preview';
+import TradeTypeSwitcher from './trade-type-switcher';
 import {
     buyContractForUi,
     normalizeTradeParameters,
@@ -334,6 +337,7 @@ const Accumilatoirs = observer(() => {
     const [selectedSymbol, setSelectedSymbol] = useState(ACCUMULATOR_MARKETS[0]?.symbol ?? 'R_100');
     const [stakeInput, setStakeInput] = useState(() => loadSavedNum('stake', DEFAULT_STAKE, 0.01, 100000));
     const [growthRate, setGrowthRate] = useState(GROWTH_RATES[0].value);
+    const [selectedTradeType, setSelectedTradeType] = useState<TTradeTypeId>('accumulators');
     const [martingale, setMartingale] = useState(() => loadSavedNum('martingale', DEFAULT_MARTINGALE, 1.01, 100));
     const [martingaleMode, setMartingaleMode] = useState<MartingaleModeType>(() => {
         try {
@@ -1331,66 +1335,74 @@ const Accumilatoirs = observer(() => {
                             </div>
                         </section>
 
-                        <TradeControls
-                            autoTradeEnabled={autoTradeEnabled}
-                            bidPrice={bidPrice}
-                            canTrade={canTrade}
-                            consecutiveLossCountInput={consecutiveLossCountInput}
-                            consecutiveLossDisplay={consecutiveLossDisplay}
-                            currency={currency}
-                            currentProfit={currentProfit}
-                            currentStakeDisplay={currentStakeDisplay}
-                            displayReturnPercent={displayReturnPercent}
-                            growthRate={growthRate}
-                            growthRateOptions={GROWTH_RATES}
-                            growthRatePercent={growthRatePercent}
-                            hasOpenContract={hasOpenContract}
-                            hasProposalBarrierData={hasProposalBarrierData}
-                            isCashingOut={isCashingOut}
-                            isLive={isLive}
-                            isMarketLoading={isMarketLoading}
-                            isPurchasing={isPurchasing}
-                            martingale={martingale}
-                            martingaleMode={martingaleMode}
-                            proposal={proposalPreview}
-                            proposalBarrierStatus={proposalBarrierStatus}
-                            proposalMessage={proposalPreview.message}
-                            proposalStatus={proposalPreview.status}
-                            queuedPurchase={queuedPurchase}
-                            selectedMarketLabel={selectedMarket?.label}
-                            stake={stakeInput}
-                            takeProfitAmount={currentTakeProfitAmount}
-                            takeProfitPercent={autoCashout.takeProfitPercent}
-                            onAutoTradeToggle={enabled => {
-                                setAutoTradeEnabled(enabled);
-                                if (enabled && !hasOpenContract) {
-                                    setQueuedPurchase(false);
-                                    queuedPurchaseRef.current = false;
-                                    setMessage('Auto trade enabled. Starting first accumulator now.');
-                                    void executePurchase();
-                                } else if (!enabled) {
-                                    setQueuedPurchase(false);
-                                    queuedPurchaseRef.current = false;
-                                    setMessage('');
-                                }
-                            }}
-                            onCommitConsecutiveLossCountInput={commitConsecutiveLossCountInput}
-                            onConsecutiveLossCountInputChange={handleConsecutiveLossCountInputChange}
-                            onGrowthRateChange={setGrowthRate}
-                            onMartingaleChange={value => setMartingale(cleanMoneyInput(value))}
-                            onMartingaleModeChange={value => setMartingaleMode(normalizeMartingaleMode(value))}
-                            onStakeChange={value => setStakeInput(cleanMoneyInput(value))}
-                            onStopAllTrades={() => void handleStopAllTrades()}
-                            onTakeProfitChange={value =>
-                                setAutoCashout(previous => ({
-                                    ...previous,
-                                    enabled: true,
-                                    takeProfitPercent: cleanMoneyInput(value),
-                                    useServerTakeProfit: true,
-                                }))
-                            }
-                            onTradeAction={() => void handleTradeAction()}
-                        />
+                        <aside className='accumilatoirs-ticket-card'>
+                            <TradeTypeSwitcher value={selectedTradeType} onChange={setSelectedTradeType} />
+
+                            {selectedTradeType === 'accumulators' ? (
+                                <TradeControls
+                                    autoTradeEnabled={autoTradeEnabled}
+                                    bidPrice={bidPrice}
+                                    canTrade={canTrade}
+                                    consecutiveLossCountInput={consecutiveLossCountInput}
+                                    consecutiveLossDisplay={consecutiveLossDisplay}
+                                    currency={currency}
+                                    currentProfit={currentProfit}
+                                    currentStakeDisplay={currentStakeDisplay}
+                                    displayReturnPercent={displayReturnPercent}
+                                    growthRate={growthRate}
+                                    growthRateOptions={GROWTH_RATES}
+                                    growthRatePercent={growthRatePercent}
+                                    hasOpenContract={hasOpenContract}
+                                    hasProposalBarrierData={hasProposalBarrierData}
+                                    isCashingOut={isCashingOut}
+                                    isLive={isLive}
+                                    isMarketLoading={isMarketLoading}
+                                    isPurchasing={isPurchasing}
+                                    martingale={martingale}
+                                    martingaleMode={martingaleMode}
+                                    proposal={proposalPreview}
+                                    proposalBarrierStatus={proposalBarrierStatus}
+                                    proposalMessage={proposalPreview.message}
+                                    proposalStatus={proposalPreview.status}
+                                    queuedPurchase={queuedPurchase}
+                                    selectedMarketLabel={selectedMarket?.label}
+                                    stake={stakeInput}
+                                    takeProfitAmount={currentTakeProfitAmount}
+                                    takeProfitPercent={autoCashout.takeProfitPercent}
+                                    onAutoTradeToggle={enabled => {
+                                        setAutoTradeEnabled(enabled);
+                                        if (enabled && !hasOpenContract) {
+                                            setQueuedPurchase(false);
+                                            queuedPurchaseRef.current = false;
+                                            setMessage('Auto trade enabled. Starting first accumulator now.');
+                                            void executePurchase();
+                                        } else if (!enabled) {
+                                            setQueuedPurchase(false);
+                                            queuedPurchaseRef.current = false;
+                                            setMessage('');
+                                        }
+                                    }}
+                                    onCommitConsecutiveLossCountInput={commitConsecutiveLossCountInput}
+                                    onConsecutiveLossCountInputChange={handleConsecutiveLossCountInputChange}
+                                    onGrowthRateChange={setGrowthRate}
+                                    onMartingaleChange={value => setMartingale(cleanMoneyInput(value))}
+                                    onMartingaleModeChange={value => setMartingaleMode(normalizeMartingaleMode(value))}
+                                    onStakeChange={value => setStakeInput(cleanMoneyInput(value))}
+                                    onStopAllTrades={() => void handleStopAllTrades()}
+                                    onTakeProfitChange={value =>
+                                        setAutoCashout(previous => ({
+                                            ...previous,
+                                            enabled: true,
+                                            takeProfitPercent: cleanMoneyInput(value),
+                                            useServerTakeProfit: true,
+                                        }))
+                                    }
+                                    onTradeAction={() => void handleTradeAction()}
+                                />
+                            ) : (
+                                <TradeTypePreview currency={currency} tradeType={getTradeTypeById(selectedTradeType)} />
+                            )}
+                        </aside>
                     </div>
                 </div>
             </ThemedScrollbars>
