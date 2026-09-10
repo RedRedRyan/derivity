@@ -513,7 +513,7 @@ const AppWrapper = observer(() => {
                                             width='24px'
                                             fill='#F0050C'
                                         />
-                                        <Localize i18n_default_text='Quick Bot' />
+                                        <Localize i18n_default_text='Dashboard' />
                                     </>
                                 }
                                 id='id-dbot-dashboard'
@@ -589,7 +589,7 @@ const AppWrapper = observer(() => {
                                                 width='24px'
                                                 fill='#F0050C'
                                             />
-                                            <Localize i18n_default_text='Manual Trading' />
+                                            <Localize i18n_default_text='Bulk Trading' />
                                         </>
                                     }
                                     id='id-manual-trading'
@@ -623,7 +623,7 @@ const AppWrapper = observer(() => {
                                                 width='24px'
                                                 fill='#F0050C'
                                             />
-                                            <Localize i18n_default_text='Pro AI' />
+                                            <Localize i18n_default_text='Manual Trading' />
                                         </>
                                     }
                                     id='id-accumilatoirs'
