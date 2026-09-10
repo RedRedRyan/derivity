@@ -524,21 +524,6 @@ const AppWrapper = observer(() => {
                             <div
                                 label={
                                     <>
-                                        <LabelPairedPuzzlePieceTwoCaptionBoldIcon
-                                            height='24px'
-                                            width='24px'
-                                            fill='#F0050C'
-                                        />
-
-                                        <Localize i18n_default_text='Bot Builder' />
-                                    </>
-                                }
-                                id='id-bot-builder'
-                            />
-
-                            <div
-                                label={
-                                    <>
                                         <Bot color='#f0050c' />
                                         <Localize i18n_default_text='Free Bots' />
                                     </>
@@ -555,7 +540,7 @@ const AppWrapper = observer(() => {
                                             width='24px'
                                             fill='#F0050C'
                                         />
-                                        <Localize i18n_default_text='Signal AI' />
+                                        <Localize i18n_default_text='Bot Builder' />
                                     </>
                                 }
                                 id='id-up-and-down'
