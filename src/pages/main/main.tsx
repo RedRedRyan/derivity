@@ -508,6 +508,37 @@ const AppWrapper = observer(() => {
                             <div
                                 label={
                                     <>
+                                        <LabelPairedObjectsColumnCaptionRegularIcon
+                                            height='24px'
+                                            width='24px'
+                                            fill='#F0050C'
+                                        />
+                                        <Localize i18n_default_text='Quick Bot' />
+                                    </>
+                                }
+                                id='id-dbot-dashboard'
+                            >
+                                <Dashboard handleTabChange={handleTabChange} />
+                            </div>
+
+                            <div
+                                label={
+                                    <>
+                                        <LabelPairedPuzzlePieceTwoCaptionBoldIcon
+                                            height='24px'
+                                            width='24px'
+                                            fill='#F0050C'
+                                        />
+
+                                        <Localize i18n_default_text='Bot Builder' />
+                                    </>
+                                }
+                                id='id-bot-builder'
+                            />
+
+                            <div
+                                label={
+                                    <>
                                         <Bot color='#f0050c' />
                                         <Localize i18n_default_text='Free Bots' />
                                     </>
@@ -531,35 +562,7 @@ const AppWrapper = observer(() => {
                             >
                                 <UpAndDown />
                             </div>
-                            <div
-                                label={
-                                    <>
-                                        <LabelPairedObjectsColumnCaptionRegularIcon
-                                            height='24px'
-                                            width='24px'
-                                            fill='#F0050C'
-                                        />
-                                        <Localize i18n_default_text='Quick Bot' />
-                                    </>
-                                }
-                                id='id-dbot-dashboard'
-                            >
-                                <Dashboard handleTabChange={handleTabChange} />
-                            </div>
-                            <div
-                                label={
-                                    <>
-                                        <LabelPairedPuzzlePieceTwoCaptionBoldIcon
-                                            height='24px'
-                                            width='24px'
-                                            fill='#F0050C'
-                                        />
 
-                                        <Localize i18n_default_text='Bot Builder' />
-                                    </>
-                                }
-                                id='id-bot-builder'
-                            />
                             {show_auto_trades && (
                                 <div
                                     label={
